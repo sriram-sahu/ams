@@ -8,7 +8,6 @@ import jsPDF from "jspdf";
 import emailjs from "@emailjs/browser";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/button";
 import { useReactToPrint } from "react-to-print";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
