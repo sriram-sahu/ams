@@ -3,16 +3,8 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+
 const StudentNavbar = (props) => {
-  
-  
-  
-  
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -24,7 +16,6 @@ const StudentNavbar = (props) => {
           </Toolbar>
         </AppBar>
       </Box>
-      
     </div>
   );
 };
