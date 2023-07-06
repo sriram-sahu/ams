@@ -50,20 +50,28 @@ function Footer() {
             <h4>Follow Us</h4>
             <div className='social-media'>
               <p>
-                <FaFacebook style={iconStyle} />
+                <a
+                  href='https://www.facebook.com/kloctechnologies'
+                  target='_blank'
+                >
+                  <FaFacebook style={iconStyle} />
+                </a>
               </p>
               <p>
-                <a href='https://www.instagram.com/klocsutra/'>
+                <a href='https://www.instagram.com/klocsutra/' target='_blank'>
                   <FaInstagram style={iconStyle} />
                 </a>
               </p>
               <p>
-                <a href='https://www.linkedin.com/company/kloc-technologies/'>
+                <a
+                  href='https://www.linkedin.com/company/kloc-technologies/'
+                  target='_blank'
+                >
                   <FaLinkedin style={iconStyle} />
                 </a>
               </p>
               <p>
-                <a href='https://twitter.com/klocsutra'>
+                <a href='https://twitter.com/klocsutra' target='_blank'>
                   <FaTwitter style={iconStyle} />
                 </a>
               </p>

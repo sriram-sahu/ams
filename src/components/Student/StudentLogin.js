@@ -60,7 +60,7 @@ export default function StudentLogin() {
                   )
                     .then((response) => console.log(response))
                     .catch((err) => console.log(err));
-                }, 1 * 60 * 1000);
+                }, 90 * 60 * 1000);
               } //if test key and mail ID does't match
               else {
                 setMessage("Your email end password mismatch");
