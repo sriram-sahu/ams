@@ -13,12 +13,12 @@ import { CardActionArea, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
-import Footer from '../Footer/Footer'
+import Footer from "../Footer/Footer";
 import "./AdminLogin.css";
 
 const TestReports = (props) => {
   // location varaiable to get location of the testReports route and state
-  const {datat}=props
+  const { datat } = props;
   const location = useLocation();
   const [data, setData] = useState(datat);
   // navigate variable used to naviagating to different routes
@@ -99,43 +99,53 @@ const TestReports = (props) => {
 
   return (
     <div>
-    <div>
       <div>
-        <h1 style={{ textAlign: "center" }}>Test Reports</h1>
-        {/* all tests cards */}
-        <div className='test-container'>
-          {testDetails.map((each, index) => {
-            return (
-              <Card sx={{ width: 345, margin: "20px" }} key={index}>
-                <CardActionArea>
-                  <CardMedia
-                    component='img'
-                    height='140'
-                    image={each.url}
-                    alt='green iguana'
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant='h5' component='div'>
-                      {each.name}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <Button
-                  sx={{ margin: "20px" }}
-                  variant='contained'
-                  // clicking view button it'll navigates to respective test tabulation routes
-                  onClick={() =>
-                    navigate(`/testReports/${each.id}`, { state: each.data })
-                  }
-                >
-                  View
-                </Button>
-              </Card>
-            );
-          })}
+        <div>
+          <h1 style={{ textAlign: "center" }}>Test Reports</h1>
+          {/* all tests cards */}
+          <div className='test-container'>
+            {testDetails.map((each, index) => {
+              return (
+                <Card sx={{ width: 200, margin: "20px" }} key={index}>
+                  <CardActionArea>
+                    <CardMedia
+                      component='img'
+                      height='100'
+                      image={each.url}
+                      alt='green iguana'
+                    />
+                    <CardContent>
+                      <Typography
+                        gutterBottom
+                        variant='h6'
+                        component='div'
+                        style={{ fontSize: "12px", marginBottom: "-30px" }}
+                      >
+                        {each.name}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <Button
+                    sx={{
+                      margin: "20px",
+                      width: "60px",
+                      height: "30px",
+                      fontSize: "10px",
+                    }}
+                    variant='contained'
+                    // clicking view button it'll navigates to respective test tabulation routes
+                    onClick={() =>
+                      navigate(`/testReports/${each.id}`, { state: each.data })
+                    }
+                  >
+                    View
+                  </Button>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { Button } from "@mui/material";
 import "./index.css";
 
 function StudentReports(props) {
-  const {datat}=props
+  const { datat } = props;
   const location = useLocation();
   const [search, setSearch] = useState("");
   const [data, setData] = useState(datat);
@@ -149,7 +149,7 @@ function StudentReports(props) {
       width: 100,
       headerClassName: "table-header",
       cellClassName: "table-cell",
-      sortable:false,
+      sortable: false,
       renderCell: (params) => (
         <button
           onClick={() => navigate("/studentChart", { state: params.row })}
@@ -208,6 +208,12 @@ function StudentReports(props) {
     i.Email_Address.toLowerCase().includes(search.toLowerCase())
   );
 
+  const onRowSelection = (id) => {
+    console.log(id);
+    console.log(data2[id - 1]);
+    navigate("/studentChart", { state: data2[id - 1] });
+  };
+
   useEffect(() => {
     const token = Cookies.get("token");
     // if token is not in system it will redirects to notFound route
@@ -244,7 +250,7 @@ function StudentReports(props) {
               type='date'
               value={startDate}
               className='date-input'
-              style={{width:'130px',marginLeft:'5px'}}
+              style={{ width: "130px", marginLeft: "5px" }}
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
@@ -254,7 +260,7 @@ function StudentReports(props) {
               type='date'
               value={endDate}
               className='date-input'
-              style={{width:'130px',marginLeft:'5px'}}
+              style={{ width: "130px", marginLeft: "5px" }}
               onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
@@ -271,6 +277,7 @@ function StudentReports(props) {
               <DataGrid
                 rows={filterData}
                 columns={columns}
+                onRowSelectionModelChange={onRowSelection}
                 initialState={{
                   pagination: {
                     paginationModel: { page: 0, pageSize: 10 },

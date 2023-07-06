@@ -13,7 +13,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Alert } from "@mui/material";
-import Footer from '../Footer/Footer'
+import Footer from "../Footer/Footer";
 import { useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Popup from "reactjs-popup";
@@ -103,7 +103,7 @@ const Assessment = () => {
         {
           to_name: student.name,
           from_name: "kloc",
-          message:  student.uniqueId,
+          message: student.uniqueId,
           to_email: student.email,
         },
         "MkG09aTM7gyK7zTog"
@@ -170,12 +170,12 @@ const Assessment = () => {
   };
 
   return (
-    <div className="send-assessment-main-container">
+    <div className='send-assessment-main-container'>
       <div className='assessment-container'>
         <div className='each-assessment-container'>
-          <div className="test-assessment-heading-container">
-          <h1 className="test-heading">Name of the Test</h1>
-          {/* <h1 className="test-heading1">Number of the Tests</h1> */}
+          <div className='test-assessment-heading-container'>
+            <h1 className='test-heading'>Name of the Test</h1>
+            {/* <h1 className="test-heading1">Number of the Tests</h1> */}
           </div>
           {tests.map((each, index) => (
             <div key={index} className='input-container'>
@@ -195,7 +195,7 @@ const Assessment = () => {
                   {each}
                 </label>
               </div>
-              
+
               <input
                 disabled={activeTest !== each}
                 type='number'

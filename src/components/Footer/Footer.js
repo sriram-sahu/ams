@@ -2,7 +2,8 @@ import React from "react";
 import "./Footer.css";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 const iconStyle = {
-  fontSize: "28px", // Adjust the size as per your preference
+  fontSize: "28px",
+  marginLeft: "20px",
 };
 function Footer() {
   return (
@@ -13,68 +14,39 @@ function Footer() {
             <h4>Suit #402,Brigade Irv center,</h4>
             <h4>Nallurhalli Road, Whitefield </h4>
             <h4>Bangalore - 560066</h4>
-            <a href='https://info@kloctechnologies.com'>
+            <a href='https://info@kloctechnologies.com' target='_blank'>
               info@kloctechnologies.com
             </a>
-            <br />
             <h4>mobile : +91 09663897463</h4>
           </div>
-          {/* <div className='sb__footer-links_div'>
-            <h4>Resources</h4>
-            <a href='/employer'>
-              <p>Resources center</p>
-            </a>
-            <a href='/employer'>
-              <p>testimonials</p>
-            </a>
-            <a href='/employer'>
-              <p>STV</p>
-            </a>
-          </div> */}
-          {/* <div className='sb__footer-links_div'>
-            <h4>Company</h4>
-            <a href='/employer'>
-              <p>About</p>
-            </a>
-            <a href='/employer'>
-              <p>Press</p>
-            </a>
-            <a href='/employer'>
-              <p>Career</p>
-            </a>
-            <a href='/employer'>
-              <p>Contact</p>
-            </a>
-          </div> */}
-          <div className='sb__footer-links_div'>
-            <h4>Follow Us</h4>
+          <div className=''>
+            <div className=''>
+              <img
+                alt=''
+                className='rating-img'
+                src='https://res.cloudinary.com/dhbmdoldt/image/upload/v1688622021/WhatsApp_Image_2_y1einr.jpg'
+              />
+            </div>
+            <h4 className='followus-container'>Follow Us</h4>
             <div className='social-media'>
-              <p>
-                <a
-                  href='https://www.facebook.com/kloctechnologies'
-                  target='_blank'
-                >
-                  <FaFacebook style={iconStyle} />
-                </a>
-              </p>
-              <p>
-                <a href='https://www.instagram.com/klocsutra/' target='_blank'>
-                  <FaInstagram style={iconStyle} />
-                </a>
-              </p>
-              <p>
-                <a
-                  href='https://www.linkedin.com/company/kloc-technologies/'
-                  target='_blank'
-                >
-                  <FaLinkedin style={iconStyle} />
-                </a>
-              </p>
-              <p>
-                <a href='https://twitter.com/klocsutra' target='_blank'>
-                  <FaTwitter style={iconStyle} />
-                </a>
-              </p>
+              <a
+                href='https://www.facebook.com/kloctechnologies'
+                target='_blank'
+              >
+                <FaFacebook className='icon' style={iconStyle} />
+              </a>
+              <a href='https://www.instagram.com/klocsutra/' target='_blank'>
+                <FaInstagram style={iconStyle} />
+              </a>
+              <a
+                href='https://www.linkedin.com/company/kloc-technologies/'
+                target='_blank'
+              >
+                <FaLinkedin style={iconStyle} />
+              </a>
+              <a href='https://twitter.com/klocsutra' target='_blank'>
+                <FaTwitter style={iconStyle} />
+              </a>
             </div>
           </div>
         </div>
@@ -87,22 +59,28 @@ function Footer() {
             </p>
           </div>
           <div className='sb__footer-below-links'>
-            <a href='https://kloctechnologies.com/terms-conditions'>
+            <a
+              href='https://kloctechnologies.com/terms-conditions'
+              target='_blank'
+            >
               <div>
                 <p>terms & Conditions</p>
               </div>
             </a>
-            <a href='https://kloctechnologies.com/privacy-policy'>
+            <a
+              href='https://kloctechnologies.com/privacy-policy'
+              target='_blank'
+            >
               <div>
                 <p>Privacy</p>
               </div>
             </a>
-            <a href='https://kloctechnologies.com/about/'>
+            <a href='https://kloctechnologies.com/about/' target='_blank'>
               <div>
                 <p>About</p>
               </div>
             </a>
-            <a href='https://kloctechnologies.com/contact/'>
+            <a href='https://kloctechnologies.com/contact/' target='_blank'>
               <div>
                 <p>Contact</p>
               </div>
