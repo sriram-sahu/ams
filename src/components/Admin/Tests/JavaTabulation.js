@@ -83,7 +83,6 @@ function JavaTest() {
       sortable: false,
       renderCell: (params) => (
         <button
-          className='button1'
           onClick={() => navigate("/studentChart", { state: params.row })}
           style={{ width: "60px", padding: "5px" }}
         >

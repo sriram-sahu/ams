@@ -86,7 +86,6 @@ function FreshersJuniorTabulation() {
       renderCell: (params) => (
         <button
           onClick={() => {
-            className = "button1";
             navigate("/studentChart", { state: params.row });
             handleUpdate(params.row);
           }}
