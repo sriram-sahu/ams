@@ -61,6 +61,7 @@ const Assessment = () => {
   };
   const navigate = useNavigate();
 
+  console.log(studentCount);
   useEffect(() => {
     //cookies token is for validation of admin
     const token = Cookies.get("token");
@@ -226,7 +227,7 @@ const Assessment = () => {
               onInputChange={(values) => handleInputChange(index, values)}
             />
           ))}
-        {proceeding && (
+        {proceeding && studentCount !== "" && (
           <div className='text-center'>
             <button
               onClick={handleClickOpen}
