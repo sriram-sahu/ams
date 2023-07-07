@@ -21,6 +21,7 @@ const AdminLogin = () => {
   const [isAssessment, setIsAssessment] = useState(false);
   const [isTestReports, setIsTestReports] = useState(false);
   const [isStudentReports, setIsStudentReports] = useState(false);
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [fresherData, setFresherData] = useState([]);
   const [pythonData, setPythonData] = useState([]);
   const [fullStackData, setFullStackData] = useState([]);
@@ -38,6 +39,8 @@ const AdminLogin = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   // navigate varaible used to navigating to different paths
   const navigate = useNavigate();
+
+  const activeClassName = "activeTab";
 
   useEffect(() => {
     //  after component rendering the below logic will execute
@@ -410,6 +413,7 @@ const AdminLogin = () => {
           // Cookies.set method is used to set cookies for the login id token and expiration validity of 30 days
           Cookies.set("token", loginId, { expires: 30 });
           // if email does not exists, notFound component will render
+          handleAssessment();
         } else {
           navigate("/unauthorized");
         }
@@ -973,24 +977,28 @@ const AdminLogin = () => {
     setIsAssessment(false);
     setIsTestReports(false);
     setIsStudentReports(false);
+    setActiveTab("dashboard");
   };
   const handleAssessment = () => {
     setIsDashboard(false);
     setIsAssessment(true);
     setIsTestReports(false);
     setIsStudentReports(false);
+    setActiveTab("assessments");
   };
   const handleTestReports = () => {
     setIsDashboard(false);
     setIsAssessment(false);
     setIsTestReports(true);
     setIsStudentReports(false);
+    setActiveTab("testReports");
   };
   const handleStudentReports = () => {
     setIsDashboard(false);
     setIsAssessment(false);
     setIsTestReports(false);
     setIsStudentReports(true);
+    setActiveTab("studentReports");
   };
 
   return (
@@ -1013,28 +1021,44 @@ const AdminLogin = () => {
               {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
               <p
                 onClick={() => handleDashboard()}
-                className='admin-desktop-header-navbar-link'
+                className={
+                  activeTab === "dashboard"
+                    ? `${activeClassName} `
+                    : "admin-desktop-header-navbar-link"
+                }
               >
                 Dashboard
               </p>
               {/* when clicking this Assessments text, it'll navigates to send assessments route */}
               <p
                 onClick={() => handleAssessment()}
-                className='admin-desktop-header-navbar-link'
+                className={
+                  activeTab === "assessments"
+                    ? `${activeClassName} `
+                    : "admin-desktop-header-navbar-link"
+                }
               >
                 Assessments
               </p>
               {/* when clicking this Test Reports text, it'll navigates to test reports route */}
               <p
                 onClick={() => handleTestReports()}
-                className='admin-desktop-header-navbar-link'
+                className={
+                  activeTab === "testReports"
+                    ? `${activeClassName} `
+                    : "admin-desktop-header-navbar-link"
+                }
               >
                 Test Reports
               </p>
               {/* when clicking this student reports text, it'll navigates to student reports route */}
               <p
                 onClick={() => handleStudentReports()}
-                className='admin-desktop-header-navbar-link'
+                className={
+                  activeTab === "studentReports"
+                    ? `${activeClassName} `
+                    : "admin-desktop-header-navbar-link"
+                }
               >
                 Student Reports
               </p>

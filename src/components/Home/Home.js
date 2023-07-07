@@ -85,7 +85,7 @@ function Home() {
             backgroundImage:
               "url(https://source.unsplash.com/random?wallpapers)",
             backgroundRepeat: "no-repeat",
-            height: "100vh",
+            height: "70vh",
             backgroundSize: "cover",
           }}
         >

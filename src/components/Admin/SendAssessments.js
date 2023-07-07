@@ -1,4 +1,5 @@
-// import all required packages like react, unique-random, @emailjs-browser, js-cookie, react-router-dom, @mui-material, reactjs-popup, react-icons and components like EachCandidateInputField, index.css components to render the SendAssessments component
+// SendAssessments component is about sending different tests to students
+// import all required packages like react, unique-random, @emailjs-browser, js-cookie, react-router-dom, @mui-material, reactjs-popup, react-icons and components like EachCandidateInputField, EachCandidateColumnField1, index.css and reactjs-popup/dist/index.css files to render the SendAssessments component
 import React, { useState, useEffect } from "react";
 import EachCandidateInputField from "./EachCandidateInputField";
 import uniqueRandom from "unique-random";
@@ -12,22 +13,34 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import EachCandidateColumnField1 from "./EachCandidateColumnField1";
 import { Alert } from "@mui/material";
-import Footer from "../Footer/Footer";
 import { useLocation } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import { PinDropSharp } from "@mui/icons-material";
 
-const Assessment = () => {
+const Assessment = (props) => {
+  // data prop
+  const { data } = props;
+  // usestate of activeTest to store active test name
   const [activeTest, setActiveTest] = useState("");
+  // studentCount usestate to store student count
   const [studentCount, setStudentCount] = useState(1);
+  // usestate of proceeding to store boolean value
   const [proceeding, setProceeding] = useState(false);
+  // usestate of proceedingStatus to store boolean value
   const [proceedingStatus, setProceedingStatus] = useState(false);
+  // candidateFields usestate to store input fields data
   const [candidateFields, setCandidateFields] = useState([]);
+  // open usestate to store boolean value of open variable
   const [open, setOpen] = useState(false);
-  const location = useLocation();
-  const [finalData, setFinalData] = useState(location.state);
+
+  const [isValid, setIsValid] = useState(false);
+
+  const checkValidEmail = (bool) => {
+    setIsValid(bool);
+  };
+  // all tests names array
   const tests = [
     "Freshers Junior Test",
     "Fresher Test",
@@ -40,35 +53,42 @@ const Assessment = () => {
     "MERN Developer Junior Test",
     "MERN Developer Intermediate Test",
   ];
+  // isEmptyField variable to check whether some fields are empty or not
   const isEmptyField = candidateFields.some((each) =>
     Object.values(each).some((value) => value === "")
   );
   //this method is for opening for dialog Box onClicking sending Assessment button
   const handleClickOpen = () => {
-    //if input fields are not empty dialogBox will open for confirmation
-    if (!isEmptyField) {
-      setOpen(true);
-    }
-    // if any of input fields are empty
     if (isEmptyField) {
       alert("Please fill in all the candidate details");
       return;
     }
+    if (!isValid) {
+      alert("Invalid Input Fields");
+      return;
+    }
+    //if input fields are not empty dialogBox will open for confirmation
+    if (!isEmptyField && !isValid) {
+      setOpen(true);
+    }
+    if (isValid) {
+      alert("Check all Input fields");
+    }
+    // if any of input fields are empty
   };
   // this handleClose method is for closing of dialog box
   const handleClose = () => {
     setOpen(false);
   };
+  // navigate variable used to navigating to different routes
   const navigate = useNavigate();
 
-  console.log(studentCount);
   useEffect(() => {
     //cookies token is for validation of admin
     const token = Cookies.get("token");
     if (!token) {
       navigate("/unauthorized");
     }
-
     setStudentCount(1);
     setProceeding(false);
   }, [activeTest]);
@@ -161,7 +181,6 @@ const Assessment = () => {
   };
   const onClickSendAssessment = () => {
     //console.log("triggered");
-
     candidateFields.forEach((each) => {
       updateStudentThroughSheetDb(each);
     });
@@ -169,6 +188,19 @@ const Assessment = () => {
     setProceeding(false);
     setProceedingStatus(false);
   };
+
+  useEffect(() => {
+    //cookies token is for validation of admin
+    const token = Cookies.get("token");
+    if (!token) {
+      navigate("/unauthorized");
+    }
+    setStudentCount(1);
+    setProceeding(false);
+  }, [activeTest]);
+  useEffect(() => {
+    setProceeding(false);
+  }, [studentCount]);
 
   return (
     <div className='send-assessment-main-container'>
@@ -214,7 +246,7 @@ const Assessment = () => {
         </div>
         <button
           variant='contained'
-          className='assessment-button m-3'
+          className='assessment-button'
           onClick={onClickProceed}
         >
           Proceed
@@ -223,22 +255,51 @@ const Assessment = () => {
       <div className='each-input-student-details-container'>
         {/* studentCount times adding EachCandidateInputField */}
         {/* if proceeding is true then only EachCandidateInputField and sendAssessments button shows in the page */}
+        {proceeding && Number(studentCount) > 0 && (
+          <div className='bg-each-candidate-field'>
+            <div className='each-candidate-subContainer1'>
+              <label htmlFor='outlined-basic-1' className='label-assessment'>
+                Name:
+              </label>
+              <label htmlFor='outlined-basic-1' className='label-assessment'>
+                Email:
+              </label>
+              <label htmlFor='outlined-basic-1' className='label-assessment'>
+                Phone:
+              </label>
+              <label htmlFor='outlined-basic-1' className='label-assessment'>
+                Test End Date:
+              </label>
+            </div>
+          </div>
+        )}
         {proceeding &&
           Array.from({ length: studentCount }, (_, index) => (
             <EachCandidateInputField
+              isValidMail={checkValidEmail}
+              key={index}
+              index={index} // Passing the index as a prop
+              onInputChange={(values) => handleInputChange(index, values)}
+            />
+          ))}
+        {proceeding &&
+          Array.from({ length: studentCount }, (_, index) => (
+            <EachCandidateColumnField1
+              isValidMail={checkValidEmail}
               key={index}
               index={index} // Passing the index as a prop
               onInputChange={(values) => handleInputChange(index, values)}
             />
           ))}
         {proceeding && Number(studentCount) > 0 && (
-          <div className='text-center'>
+          <div className='text-err'>
             <button
               onClick={handleClickOpen}
               className='send-assessment-button'
             >
               SEND ASSESSMENT
             </button>
+            {!isValid && <p>check all fields</p>}
             {/* dialog box from material ui */}
             <Dialog
               open={open}

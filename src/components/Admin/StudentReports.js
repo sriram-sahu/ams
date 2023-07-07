@@ -1,6 +1,5 @@
 // import all required packages like react, react-icons, reactjs-popup, js-cookie, react-router-dom and css file StudentReports.css for styling
 import React, { useState, useEffect } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Cookies from "js-cookie";
@@ -296,7 +295,7 @@ function StudentReports(props) {
         <div className='d-lg-none mobile-table-container'>
           {filterData.length > 0
             ? filterData.map((item, index) => (
-                <div className='table-data-container'>
+                <div className='table-data-container' key={index}>
                   <div className='table-data'>
                     <p className='th'>Id</p>
                     <p className='td'>{index + 1}</p>
