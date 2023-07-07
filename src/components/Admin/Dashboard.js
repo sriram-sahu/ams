@@ -10,7 +10,7 @@ import "reactjs-popup/dist/index.css";
 import "./index.css";
 
 const Dashboard = (props) => {
-  const {data}=props
+  const { data } = props;
   const location = useLocation();
   const navigate = useNavigate();
   const [finalData, setFinalData] = useState(data || []);
@@ -19,44 +19,77 @@ const Dashboard = (props) => {
   const [filterData, setFilterData] = useState(data2);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-    const handleFilter = () => {
-      const filtered =data2.filter((item) => {
-        const itemDate = new Date(item.Timestamp);
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        end.setDate(end.getDate() + 1); // Added one day to the end date
-        return itemDate >= start && itemDate <= end;
-  
-      });
-  
-     setFilterData(filtered)
-   
-    };
+  const handleFilter = () => {
+    const filtered = data2.filter((item) => {
+      const itemDate = new Date(item.Timestamp);
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      end.setDate(end.getDate() + 1); // Added one day to the end date
+      return itemDate >= start && itemDate <= end;
+    });
 
- 
-  const fresher = filterData?.length ? filterData.filter(item => item.testType==="Freshers Test") : []
-  const freshersJunior = filterData?.length ? filterData.filter(item => item.testType==="Freshers Junior Test") : []
-  const python = filterData?.length ? filterData.filter(item => item.testType==="Python Test") : []
-  const frontendfresher = filterData?.length ? filterData.filter(item => item.testType==="Front End Fresher Test") : []
-  console.log(frontendfresher)
-  const qa = filterData?.length ? filterData.filter(item => item.testType==="QA Test") : []
-  const merndeveloperintermediate = filterData?.length ? filterData.filter(item => item.testType==="MERN Developer Intermediate Test") : []
-  const merndeveloperjunior = filterData?.length ? filterData.filter(item => item.testType==="MERN Developer Junior Test") : []
-  const shopify = filterData?.length ? filterData.filter(item => item.testType==="Shopify Test") : []
-  const fullStack = filterData?.length ? filterData.filter(item => item.testType==="Full Stack Test") : []
-  const java = filterData?.length ? filterData.filter(item => item.testType==="Java Test") : []
+    setFilterData(filtered);
+  };
+
+  const fresher = filterData?.length
+    ? filterData.filter((item) => item.testType === "Freshers Test")
+    : [];
+  const freshersJunior = filterData?.length
+    ? filterData.filter((item) => item.testType === "Freshers Junior Test")
+    : [];
+  const python = filterData?.length
+    ? filterData.filter((item) => item.testType === "Python Test")
+    : [];
+  const frontendfresher = filterData?.length
+    ? filterData.filter((item) => item.testType === "Front End Fresher Test")
+    : [];
+  console.log(frontendfresher);
+  const qa = filterData?.length
+    ? filterData.filter((item) => item.testType === "QA Test")
+    : [];
+  const merndeveloperintermediate = filterData?.length
+    ? filterData.filter(
+        (item) => item.testType === "MERN Developer Intermediate Test"
+      )
+    : [];
+  const merndeveloperjunior = filterData?.length
+    ? filterData.filter(
+        (item) => item.testType === "MERN Developer Junior Test"
+      )
+    : [];
+  const shopify = filterData?.length
+    ? filterData.filter((item) => item.testType === "Shopify Test")
+    : [];
+  const fullStack = filterData?.length
+    ? filterData.filter((item) => item.testType === "Full Stack Test")
+    : [];
+  const java = filterData?.length
+    ? filterData.filter((item) => item.testType === "Java Test")
+    : [];
   const pieData = [
     ["Language", "Speakers (in millions)"],
-    ["Fresher_Junior_Test", freshersJunior?.length ?  freshersJunior?.length : 0],
+    [
+      "Fresher_Junior_Test",
+      freshersJunior?.length ? freshersJunior?.length : 0,
+    ],
     ["Freshers_Test", fresher?.length ? fresher?.length : 0],
-    ["Python_Test",python?.length ?  python?.length : 0],
-    ["Front_End_Fresher_Test", frontendfresher?.length ?frontendfresher?.length : 0],
-    ["QA_Test",qa?.length ?qa?.length : 0],
-    ["Full_Stack_Test",fullStack?.length ?fullStack?.length : 0],
+    ["Python_Test", python?.length ? python?.length : 0],
+    [
+      "Front_End_Fresher_Test",
+      frontendfresher?.length ? frontendfresher?.length : 0,
+    ],
+    ["QA_Test", qa?.length ? qa?.length : 0],
+    ["Full_Stack_Test", fullStack?.length ? fullStack?.length : 0],
     ["Java_Test", java?.length ? java?.length : 0],
-    ["Mern_Developer_Intermediate_Test", merndeveloperintermediate?.length ?  merndeveloperintermediate?.length : 0],
-    ["Mern_Developer_Junior_Test",merndeveloperjunior?.length ?  merndeveloperjunior?.length : 0],
-    ["Shopify_Test",shopify?.length ?  shopify?.length : 0],
+    [
+      "Mern_Developer_Intermediate_Test",
+      merndeveloperintermediate?.length ? merndeveloperintermediate?.length : 0,
+    ],
+    [
+      "Mern_Developer_Junior_Test",
+      merndeveloperjunior?.length ? merndeveloperjunior?.length : 0,
+    ],
+    ["Shopify_Test", shopify?.length ? shopify?.length : 0],
   ];
 
   let freshers_aptitude_score = 0;
@@ -92,12 +125,12 @@ const Dashboard = (props) => {
   });
   python_aptitude_percentage =
     (python_aptitude_score /
-  python?.length /
+      python?.length /
       process.env.REACT_APP_PYTHON_TEST_APTITUDE_QUESTIONS) *
     100;
   python_technical_percentage =
     (python_technical_score /
-     python?.length /
+      python?.length /
       process.env.REACT_APP_PYTHON_TEST_TECHNICAL_QUESTIONS) *
     100;
 
@@ -117,7 +150,7 @@ const Dashboard = (props) => {
     100;
   shopify_technical_percentage =
     (shopify_technical_score /
-     shopify?.length /
+      shopify?.length /
       process.env.REACT_APP_SHOPIFY_TEST_TECHNICAL_QUESTIONS) *
     100;
 
@@ -156,12 +189,12 @@ const Dashboard = (props) => {
   });
   java_aptitude_percentage =
     (java_aptitude_score /
-     java?.length /
+      java?.length /
       process.env.REACT_APP_JAVA_TEST_APTITUDE_QUESTIONS) *
     100;
   java_technical_percentage =
     (java_technical_score /
-     java?.length /
+      java?.length /
       process.env.REACT_APP_JAVA_TEST_TECHNICAL_QUESTIONS) *
     100;
 
@@ -181,7 +214,7 @@ const Dashboard = (props) => {
   });
   Qa_aptitude_percentage =
     (Qa_aptitude_score /
-     qa?.length /
+      qa?.length /
       process.env.REACT_APP_QA_TEST_APTITUDE_QUESTIONS) *
     100;
   Qa_technical_percentage =
@@ -202,12 +235,12 @@ const Dashboard = (props) => {
   });
   frontendfresher_aptitude_percentage =
     (frontendfresher_aptitude_score /
-    frontendfresher?.length /
+      frontendfresher?.length /
       process.env.REACT_APP_FRONTEND_FRESHER_TEST_APTITUDE_QUESTIONS) *
     100;
   frontendfresher_technical_percentage =
     (frontendfresher_technical_score /
-    frontendfresher?.length /
+      frontendfresher?.length /
       process.env.REACT_APP_FRONTEND_FRESHER_TEST_TECHNICAL_QUESTIONS) *
     100;
 
@@ -224,7 +257,7 @@ const Dashboard = (props) => {
   });
   freshersJunior_aptitude_percentage =
     (freshersJunior_aptitude_score /
-     freshersJunior?.length /
+      freshersJunior?.length /
       process.env.REACT_APP_FRESHERS_JUNIOR_TEST_APTITUDE_QUESTIONS) *
     100;
   freshersJunior_reasoning_percentage =
@@ -238,13 +271,13 @@ const Dashboard = (props) => {
   let merndeveloperintermediate_aptitude_percentage = 0; //this variable stores the data , percentage of apitude score who took  merndeveloperintermediate
   let merndeveloperintermediate_technical_percentage = 0; // this variable stores the data , percentage of Reasoning who took merndeveloperintermediate
   // this calculation for correct reponses by the candidate in mernDeveloperIntermediate
- merndeveloperintermediate?.map((item, index) => {
+  merndeveloperintermediate?.map((item, index) => {
     merndeveloperintermediate_aptitude_score += item.aptitude_score;
     merndeveloperintermediate_technical_score += item.technical_score;
   });
   merndeveloperintermediate_aptitude_percentage =
     (merndeveloperintermediate_aptitude_score /
-     merndeveloperintermediate?.length /
+      merndeveloperintermediate?.length /
       process.env
         .REACT_APP_MERN_DEVELOPER_INTERMEDIATE_TEST_APTITUDE_QUESTIONS) *
     100;
@@ -261,18 +294,18 @@ const Dashboard = (props) => {
   let merndeveloperjunior_technical_percentage = 0; // this variable stores the data , percentage of Reasoning who took merndeveloperjunior
 
   // this calculation for correct reponses by the candidate in mernDeveloperJunior
- merndeveloperjunior?.map((item, index) => {
+  merndeveloperjunior?.map((item, index) => {
     merndeveloperjunior_aptitude_score += item.aptitude_score;
     merndeveloperjunior_technical_score += item.technical_score;
   });
   merndeveloperjunior_aptitude_percentage =
     (merndeveloperjunior_aptitude_score /
-     merndeveloperjunior?.length /
+      merndeveloperjunior?.length /
       process.env.REACT_APP_MERN_DEVELOPER_JUNIOR_TEST_APTITUDE_QUESTIONS) *
     100;
   merndeveloperjunior_technical_percentage =
     (merndeveloperjunior_technical_score /
-     merndeveloperjunior?.length /
+      merndeveloperjunior?.length /
       process.env.REACT_APP_MERN_DEVELOPER_JUNIOR_TEST_TECHNICAL_QUESTIONS) *
     100;
 
@@ -322,7 +355,7 @@ const Dashboard = (props) => {
     ["FrontEndFresherAptitude", frontendfresher_aptitude_percentage],
     ["FrontEndFresherTechnical", frontendfresher_technical_percentage],
   ];
-  console.log(frontendfresherPieData)
+  console.log(frontendfresherPieData);
   //this data for designing the piechart of   freshersJuniorTest
   const freshersJuniorPieData = [
     ["Language", "Speakers (in millions)"],
@@ -423,465 +456,520 @@ const Dashboard = (props) => {
 
   return (
     <div>
-    <div className='dashboard-container'>
-      <div >
-        <h1 className="ams-heading">
-          AMS METRICS
-        </h1>
-        <div className='date-filter'>
-          <div className='display-between'>
-            Start Date:{"   "}
-            <input
-              type='date'
-              value={startDate}
-              className='date-input'
-              style={{marginLeft:'5px'}}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-          </div>
-          <div className='display-between'>
-            End Date:{" "}
-            <input
-              type='date'
-              value={endDate}
-              className='date-input'
-              style={{marginLeft:'5px'}}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </div>
-          <button
-            style={{ padding: "2px", width: "60px" }}
-            onClick={handleFilter}
-          >
-            Filter
-          </button>
-        </div>
-        {filterData.length ? (<h2 className="allmetricsHeading">
-          Below Metric is about number of tests taken by student for each test
-          in percentage
-        </h2>) : null}
-        <div style={{ textAlign: "center" }}>
-          <button className="totaltestconductedbutton">
-            Total Tests Conducted:
-            {fresher.length +
-              fullStack.length +
-              python.length +
-              freshersJunior.length +
-              frontendfresher.length +
-              qa.length +
-              java.length +
-              shopify.length +
-              merndeveloperintermediate.length +
-              merndeveloperjunior.length}
-          </button>
-        </div>
-        {filterData.length ? ( 
+      <div className='dashboard-container'>
         <div>
-        <div className="test-chart">
-          <Chart
-            className="allstremsPiechart"
-            chartType="PieChart"
-            data={pieData}
-            options={{
-              colors: [
-                "#0e3ab3",
-                "#f05232",
-                "#e89510",
-                "#2b8a3c",
-                "#963596",
-                "#5c9ed1",
-                "#e62e81",
-                "#62b027",
-                "#b02709",
-                "#102061",
-              ],
-              title: "All Test Metrics",
-              legend: "none",
-            }}
-          ></Chart>
-        <div className="piechart-details">
-          <div className="test-legend">
-            <button className="color"></button>
-            <span className="test">Python Test</span>
-          </div>
-          <div className="test-legend">
+          <h1 className='ams-heading'>AMS METRICS</h1>
+          <div className='date-filter'>
+            <div className='display-between'>
+              Start Date:{"   "}
+              <input
+                type='date'
+                value={startDate}
+                className='date-input'
+                style={{ marginLeft: "5px" }}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </div>
+            <div className='display-between'>
+              End Date:{" "}
+              <input
+                type='date'
+                value={endDate}
+                className='date-input'
+                style={{ marginLeft: "5px" }}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
             <button
-              style={{ backgroundColor: "#e62e81" }}
-              className="color"
-            ></button>
-            <span className="test">Java Test</span>
+              className='button1'
+              style={{ padding: "2px", width: "80px" }}
+              onClick={handleFilter}
+            >
+              Filter
+            </button>
           </div>
-          <div className="test-legend">
-            <button
-              style={{ backgroundColor: "#5c9ed1" }}
-              className="color"
-            ></button>
-            <span className="test">FullStack Test</span>
+          {filterData.length ? (
+            <h2 className='allmetricsHeading'>
+              Below Metric is about number of tests taken by student for each
+              test in percentage
+            </h2>
+          ) : null}
+          <div style={{ textAlign: "center" }}>
+            <button className='totaltestconductedbutton'>
+              Total Tests Conducted:
+              {fresher.length +
+                fullStack.length +
+                python.length +
+                freshersJunior.length +
+                frontendfresher.length +
+                qa.length +
+                java.length +
+                shopify.length +
+                merndeveloperintermediate.length +
+                merndeveloperjunior.length}
+            </button>
           </div>
-          <div className="test-legend">
-            <button
-              className="color"
-              style={{ backgroundColor: "#963596" }}
-            ></button>
-            <span className="test">QA Test</span>
-          </div>
-          <div className="test-legend">
-            <button
-              className="color"
-              style={{ backgroundColor: "#2b8a3c" }}
-            ></button>
-            <span className="test">Frontend Fresher Test</span>
-          </div>
-          <div className="test-legend">
-            <button
-              className="color"
-              style={{ backgroundColor: "#0e3ab3" }}
-            ></button>
-            <span className="test">Freshers Junior Test</span>
-          </div>
-          <div className="test-legend">
-            <button
-              className="color"
-              style={{ backgroundColor: "#f05232" }}
-            ></button>
-            <span className="test">Freshers Test</span>
-          </div>
-          <div className="test-legend">
-            <button
-              className="color"
-              style={{ backgroundColor: "#62b027" }}
-            ></button>
-            <span className="test">MERN Developer Intermediate Test</span>
-          </div>
-          <div className="test-legend">
-            <button
-              className="color"
-              style={{ backgroundColor: "#b02709" }}
-            ></button>
-            <span className="test">MERN Developer Junior Test</span>
-          </div>
-          <div className="test-legend">
-            <button
-              className="color"
-              style={{ backgroundColor: "#102061" }}
-            ></button>
-            <span className="test">Shopify Developer Test</span>
-          </div>
+          {filterData.length ? (
+            <div>
+              <div className='test-chart'>
+                <Chart
+                  className='allstremsPiechart'
+                  chartType='PieChart'
+                  data={pieData}
+                  options={{
+                    colors: [
+                      "#0e3ab3",
+                      "#f05232",
+                      "#e89510",
+                      "#2b8a3c",
+                      "#963596",
+                      "#5c9ed1",
+                      "#e62e81",
+                      "#62b027",
+                      "#b02709",
+                      "#102061",
+                    ],
+                    title: "All Test Metrics",
+                    legend: "none",
+                  }}
+                ></Chart>
+                <div className='piechart-details'>
+                  <div className='test-legend'>
+                    <button className='color'></button>
+                    <span className='test'>Python Test</span>
+                  </div>
+                  <div className='test-legend'>
+                    <button
+                      style={{ backgroundColor: "#e62e81" }}
+                      className='color'
+                    ></button>
+                    <span className='test'>Java Test</span>
+                  </div>
+                  <div className='test-legend'>
+                    <button
+                      style={{ backgroundColor: "#5c9ed1" }}
+                      className='color'
+                    ></button>
+                    <span className='test'>FullStack Test</span>
+                  </div>
+                  <div className='test-legend'>
+                    <button
+                      className='color'
+                      style={{ backgroundColor: "#963596" }}
+                    ></button>
+                    <span className='test'>QA Test</span>
+                  </div>
+                  <div className='test-legend'>
+                    <button
+                      className='color'
+                      style={{ backgroundColor: "#2b8a3c" }}
+                    ></button>
+                    <span className='test'>Frontend Fresher Test</span>
+                  </div>
+                  <div className='test-legend'>
+                    <button
+                      className='color'
+                      style={{ backgroundColor: "#0e3ab3" }}
+                    ></button>
+                    <span className='test'>Freshers Junior Test</span>
+                  </div>
+                  <div className='test-legend'>
+                    <button
+                      className='color'
+                      style={{ backgroundColor: "#f05232" }}
+                    ></button>
+                    <span className='test'>Freshers Test</span>
+                  </div>
+                  <div className='test-legend'>
+                    <button
+                      className='color'
+                      style={{ backgroundColor: "#62b027" }}
+                    ></button>
+                    <span className='test'>
+                      MERN Developer Intermediate Test
+                    </span>
+                  </div>
+                  <div className='test-legend'>
+                    <button
+                      className='color'
+                      style={{ backgroundColor: "#b02709" }}
+                    ></button>
+                    <span className='test'>MERN Developer Junior Test</span>
+                  </div>
+                  <div className='test-legend'>
+                    <button
+                      className='color'
+                      style={{ backgroundColor: "#102061" }}
+                    ></button>
+                    <span className='test'>Shopify Developer Test</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : null}
         </div>
-        </div>
-        </div>
-        ): null}
-      </div>
-      {filterData.length ? (<h3 className="allmetricsHeading">
-        Below Metrics are about percentage of each section which are correctly
-        answered by students of different tests
-      </h3>) : null}
-      <div className="dashboard_chart_container">
+        {filterData.length ? (
+          <h3 className='allmetricsHeading'>
+            Below Metrics are about percentage of each section which are
+            correctly answered by students of different tests
+          </h3>
+        ) : null}
+        <div className='dashboard_chart_container'>
           {fresher.length ? (
             <div>
-            <Chart width={250} height={250}
-            className="testwisePiechart"
-            chartType="PieChart"
-            data={fresherPieData}
-            options={{
-              title: `Fresher Test Metrics: ${fresher.length===1 ? '1 test' : `${fresher.length} tests`}`,
-              colors: ["#111359", "#afd25f"],
-              legend: "none",
-            }}
-          />
-          <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#111359" }}
-          ></button>
-          <span className="test-name">Aptitude</span>
-        </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#afd25f" }}
-          ></button>
-          <span className="test-name">Technical</span>
-        </div>
-        </div>
-        </div>
-          ): null}
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={fresherPieData}
+                options={{
+                  title: `Fresher Test Metrics: ${
+                    fresher.length === 1 ? "1 test" : `${fresher.length} tests`
+                  }`,
+                  colors: ["#111359", "#afd25f"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#111359" }}
+                  ></button>
+                  <span className='test-name'>Aptitude</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#afd25f" }}
+                  ></button>
+                  <span className='test-name'>Technical</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
           {python.length ? (
             <div>
-            <Chart width={250} height={250}
-            className="testwisePiechart"
-            chartType="PieChart"
-            data={pythonPieData}
-            options={{
-              title: `Python Test Metrics: ${python.length===1 ? '1 test' : `${python.length} tests`}`,
-              colors: ["#111359", "#afd25f"],
-              legend: "none",
-            }}
-          />
-          <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#111359" }}
-          ></button>
-          <span className="test-name">Aptitude</span>
-        </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#afd25f" }}
-          ></button>
-          <span className="test-name">Technical</span>
-        </div>
-      </div>
-      </div>  
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={pythonPieData}
+                options={{
+                  title: `Python Test Metrics: ${
+                    python.length === 1 ? "1 test" : `${python.length} tests`
+                  }`,
+                  colors: ["#111359", "#afd25f"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#111359" }}
+                  ></button>
+                  <span className='test-name'>Aptitude</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#afd25f" }}
+                  ></button>
+                  <span className='test-name'>Technical</span>
+                </div>
+              </div>
+            </div>
           ) : null}
-        {fullStack.length ? (
-          <div>
-          <Chart width={250} height={250}
-          className="testwisePiechart"
-          chartType="PieChart"
-          data={fullStackPieData}
-          options={{
-            title: `FullStack Test Metrics: ${fullStack.length===1 ? '1 test' : `${fullStack.length} tests`}`,
-            colors: ["#0e3ab3", "#b02709"],
-            legend: "none",
-          }}
-        />
-        <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#0e3ab3" }}
-          ></button>
-          <span className="test-name">Java</span>
+          {fullStack.length ? (
+            <div>
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={fullStackPieData}
+                options={{
+                  title: `FullStack Test Metrics: ${
+                    fullStack.length === 1
+                      ? "1 test"
+                      : `${fullStack.length} tests`
+                  }`,
+                  colors: ["#0e3ab3", "#b02709"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#0e3ab3" }}
+                  ></button>
+                  <span className='test-name'>Java</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#b02709" }}
+                  ></button>
+                  <span className='test-name'>React</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
+          {java.length ? (
+            <div>
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={javaPieData}
+                options={{
+                  title: `Java Test Metrics: ${
+                    java.length === 1 ? "1 test" : `${java.length} tests`
+                  }`,
+                  colors: ["#111359", "#afd25f"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#111359" }}
+                  ></button>
+                  <span className='test-name'>Aptitude</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#afd25f" }}
+                  ></button>
+                  <span className='test-name'>Technical</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
+          {qa.length ? (
+            <div>
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={qaPieData}
+                options={{
+                  title: `QA Test Metrics: ${
+                    qa.length === 1 ? "1 test" : `${qa.length} tests`
+                  }`,
+                  colors: ["#111359", "#afd25f"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#111359" }}
+                  ></button>
+                  <span className='test-name'>Aptitude</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#afd25f" }}
+                  ></button>
+                  <span className='test-name'>Technical</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
+          {frontendfresher.length ? (
+            <div>
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={frontendfresherPieData}
+                options={{
+                  title: `Front End Fresher Test Metrics: ${
+                    frontendfresher.length === 1
+                      ? "1 test"
+                      : `${frontendfresher.length} tests`
+                  }`,
+                  colors: ["#111359", "#afd25f"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#111359" }}
+                  ></button>
+                  <span className='test-name'>Aptitude</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#afd25f" }}
+                  ></button>
+                  <span className='test-name'>Technical</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          {freshersJunior.length ? (
+            <div>
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={freshersJuniorPieData}
+                options={{
+                  title: `Freshers Junior Test Metrics: ${
+                    freshersJunior.length === 1
+                      ? "1 test"
+                      : `${freshersJunior.length} tests`
+                  }`,
+                  colors: ["#111359", "#f553e5"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#111359" }}
+                  ></button>
+                  <span className='test-name'>Aptitude</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#f553e5" }}
+                  ></button>
+                  <span className='test-name'>Reasoning</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
+          {merndeveloperjunior.length ? (
+            <div>
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={merndeveloperJuniorPieData}
+                options={{
+                  title: `MERN Developer Junior Test Metrics: ${
+                    merndeveloperjunior.length === 1
+                      ? "1 test"
+                      : `${merndeveloperjunior.length} tests`
+                  }`,
+                  colors: ["#111359", "#afd25f"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#111359" }}
+                  ></button>
+                  <span className='test-name'>Aptitude</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#afd25f" }}
+                  ></button>
+                  <span className='test-name'>Technical</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          {merndeveloperintermediate.length ? (
+            <div>
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={merndeveloperintermediatePieData}
+                options={{
+                  title: `MERN Developer Intermediate Test Metrics: ${
+                    merndeveloperintermediate.length === 1
+                      ? "1 test"
+                      : `${merndeveloperintermediate.length} tests`
+                  }`,
+                  colors: ["#111359", "#afd25f"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#111359" }}
+                  ></button>
+                  <span className='test-name'>Aptitude</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#afd25f" }}
+                  ></button>
+                  <span className='test-name'>Technical</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          {shopify.length ? (
+            <div>
+              <Chart
+                width={250}
+                height={250}
+                className='testwisePiechart'
+                chartType='PieChart'
+                data={shopifyPieData}
+                options={{
+                  title: `Shopify Test Metrics: ${
+                    shopify.length === 1 ? "1 test" : `${shopify.length} tests`
+                  }`,
+                  colors: ["#111359", "#afd25f"],
+                  legend: "none",
+                }}
+              />
+              <div className='piechart-container'>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#111359" }}
+                  ></button>
+                  <span className='test-name'>Aptitude</span>
+                </div>
+                <div className='legend'>
+                  <button
+                    className='color-name'
+                    style={{ backgroundColor: "#afd25f" }}
+                  ></button>
+                  <span className='test-name'>Technical</span>
+                </div>
+              </div>
+            </div>
+          ) : null}
         </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#b02709" }}
-          ></button>
-          <span className="test-name">React</span>
-        </div>
       </div>
-      </div>
-        ): null}
-        {java.length ? (
-          <div>
-          <Chart width={250} height={250}
-          className="testwisePiechart"
-          chartType="PieChart"
-          data={javaPieData}
-          options={{
-            title: `Java Test Metrics: ${java.length===1 ? '1 test' : `${java.length} tests`}`,
-            colors: ["#111359", "#afd25f"],
-            legend: "none",
-          }}
-        />
-        <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#111359" }}
-          ></button>
-          <span className="test-name">Aptitude</span>
-        </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#afd25f" }}
-          ></button>
-          <span className="test-name">Technical</span>
-        </div>
-      </div>
-      </div>
-        ) : null}
-        {qa.length ? (
-          <div>
-          <Chart width={250} height={250}
-          className="testwisePiechart"
-          chartType="PieChart"
-          data={qaPieData}
-          options={{
-            title: `QA Test Metrics: ${qa.length===1 ? '1 test' : `${qa.length} tests`}`,
-            colors: ["#111359", "#afd25f"],
-            legend: "none",
-          }}
-        />
-        <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#111359" }}
-          ></button>
-          <span className="test-name">Aptitude</span>
-        </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#afd25f" }}
-          ></button>
-          <span className="test-name">Technical</span>
-        </div>
-      </div>
-      </div>
-        ) : null} 
-        {frontendfresher.length ? (
-          <div>
-          <Chart width={250} height={250}
-          className="testwisePiechart"
-          chartType="PieChart"
-          data={frontendfresherPieData}
-          options={{
-            title: `Front End Fresher Test Metrics: ${frontendfresher.length===1 ? '1 test' : `${frontendfresher.length} tests`}`,
-            colors: ["#111359", "#afd25f"],
-            legend: "none",
-          }}
-          />
-          <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#111359" }}
-          ></button>
-          <span className="test-name">Aptitude</span>
-        </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#afd25f" }}
-          ></button>
-          <span className="test-name">Technical</span>
-        </div>
-      </div>
-      </div>
-        ) : null}
-        
-        {freshersJunior.length ? (
-          <div>
-          <Chart width={250} height={250}
-          className="testwisePiechart"
-          chartType="PieChart"
-          data={freshersJuniorPieData}
-          options={{
-            title: `Freshers Junior Test Metrics: ${freshersJunior.length===1 ? '1 test' : `${freshersJunior.length} tests`}`,
-            colors: ["#111359", "#f553e5"],
-            legend: "none",
-          }}
-        />
-        <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#111359" }}
-          ></button>
-          <span className="test-name">Aptitude</span>
-        </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#f553e5" }}
-          ></button>
-          <span className="test-name">Reasoning</span>
-        </div>
-      </div>
-      </div>
-        ) : null}
-        {merndeveloperjunior.length ? (
-          <div>
-          <Chart width={250} height={250}
-          className="testwisePiechart"
-          chartType="PieChart"
-          data={merndeveloperJuniorPieData}
-          options={{
-            title: `MERN Developer Junior Test Metrics: ${merndeveloperjunior.length===1 ? '1 test' : `${merndeveloperjunior.length} tests`}`,
-            colors: ["#111359", "#afd25f"],
-            legend: "none",
-          }}
-        />
-        <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#111359" }}
-          ></button>
-          <span className="test-name">Aptitude</span>
-        </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#afd25f" }}
-          ></button>
-          <span className="test-name">Technical</span>
-        </div>
-      </div>
-      </div>
-        ) : null}
-        
-        {merndeveloperintermediate.length ? (
-          <div>
-          <Chart width={250} height={250}
-          className="testwisePiechart"
-          chartType="PieChart"
-          data={merndeveloperintermediatePieData}
-          options={{
-            title: `MERN Developer Intermediate Test Metrics: ${merndeveloperintermediate.length===1 ? '1 test' : `${merndeveloperintermediate.length} tests`}`,
-            colors: ["#111359", "#afd25f"],
-            legend: "none",
-          }}
-        />
-        <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#111359" }}
-          ></button>
-          <span className="test-name">Aptitude</span>
-        </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#afd25f" }}
-          ></button>
-          <span className="test-name">Technical</span>
-        </div>
-      </div>
-      </div>
-        ) : null}
-        
-        {shopify.length ? (
-          <div>
-          <Chart width={250} height={250}
-          className="testwisePiechart"
-          chartType="PieChart"
-          data={shopifyPieData}
-          options={{
-            title: `Shopify Test Metrics: ${shopify.length===1 ? '1 test' : `${shopify.length} tests`}`,
-            colors: ["#111359", "#afd25f"],
-            legend: "none",
-          }}
-        />
-        <div className="piechart-container">
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#111359" }}
-          ></button>
-          <span className="test-name">Aptitude</span>
-        </div>
-        <div className="legend">
-          <button
-            className="color-name"
-            style={{ backgroundColor: "#afd25f" }}
-          ></button>
-          <span className="test-name">Technical</span>
-        </div>
-      </div>
-      </div>
-        ) : null}
-      </div>
-    </div>
     </div>
   );
 };

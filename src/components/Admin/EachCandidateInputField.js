@@ -50,6 +50,7 @@ const EachCandidateInputField = ({ onInputChange }) => {
             <input
               id='outlined-basic-2'
               placeholder='Email'
+              type='email'
               variant='outlined'
               className='custom-input-field'
               value={inputValues.email}

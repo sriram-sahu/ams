@@ -912,3 +912,15 @@ th {
   background-color: black;
   height: 2px;
 }
+
+.button1 {
+  background-color: #2d2f75;
+  border: 1px solid transparent;
+  padding: 20px;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none #6b7280 solid;
+  width: 1000px;
+}

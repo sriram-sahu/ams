@@ -231,7 +231,7 @@ const Assessment = () => {
               onInputChange={(values) => handleInputChange(index, values)}
             />
           ))}
-        {proceeding && studentCount !== "" && (
+        {proceeding && Number(studentCount) > 0 && (
           <div className='text-center'>
             <button
               onClick={handleClickOpen}

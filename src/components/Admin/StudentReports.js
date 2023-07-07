@@ -152,6 +152,7 @@ function StudentReports(props) {
       sortable: false,
       renderCell: (params) => (
         <button
+          className='button1'
           onClick={() => navigate("/studentChart", { state: params.row })}
           style={{ padding: "3px", width: "60px" }}
         >
@@ -204,8 +205,8 @@ function StudentReports(props) {
     setFilterData(filtered);
   };
 
-  const searchData = filterData.filter((i) =>
-    i.Email_Address.toLowerCase().includes(search.toLowerCase())
+  const searchData = filterData?.filter((i) =>
+    i.Email_Address?.toLowerCase().includes(search?.toLowerCase())
   );
 
   const onRowSelection = (id) => {
@@ -265,6 +266,7 @@ function StudentReports(props) {
             />
           </div>
           <button
+            className='button1'
             style={{ padding: "2px", width: "60px" }}
             onClick={handleFilter}
           >
