@@ -200,9 +200,13 @@ const Assessment = () => {
               <input
                 disabled={activeTest !== each}
                 type='number'
+                maxLength='2'
                 className='assessmentContainerInput'
                 id={index}
-                onChange={(e) => setStudentCount(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value.length < 3)
+                    setStudentCount(e.target.value);
+                }}
                 value={activeTest === each ? studentCount : ""}
               />
             </div>
