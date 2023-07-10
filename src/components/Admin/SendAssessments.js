@@ -38,6 +38,7 @@ const Assessment = (props) => {
   const [isValid, setIsValid] = useState(false);
 
   const checkValidEmail = (bool) => {
+    console.log(bool);
     setIsValid(bool);
   };
   // all tests names array
@@ -68,8 +69,9 @@ const Assessment = (props) => {
       return;
     }
     //if input fields are not empty dialogBox will open for confirmation
-    if (!isEmptyField && !isValid) {
+    if (!isEmptyField && isValid) {
       setOpen(true);
+      return;
     }
     if (isValid) {
       alert("Check all Input fields");
@@ -248,6 +250,7 @@ const Assessment = (props) => {
           variant='contained'
           className='assessment-button'
           onClick={onClickProceed}
+          disabled={proceeding}
         >
           Proceed
         </button>
@@ -276,7 +279,7 @@ const Assessment = (props) => {
         {proceeding &&
           Array.from({ length: studentCount }, (_, index) => (
             <EachCandidateInputField
-              isValidMail={checkValidEmail}
+              isValidField={checkValidEmail}
               key={index}
               index={index} // Passing the index as a prop
               onInputChange={(values) => handleInputChange(index, values)}
@@ -285,7 +288,7 @@ const Assessment = (props) => {
         {proceeding &&
           Array.from({ length: studentCount }, (_, index) => (
             <EachCandidateColumnField1
-              isValidMail={checkValidEmail}
+              isValidField={checkValidEmail}
               key={index}
               index={index} // Passing the index as a prop
               onInputChange={(values) => handleInputChange(index, values)}
@@ -299,7 +302,7 @@ const Assessment = (props) => {
             >
               SEND ASSESSMENT
             </button>
-            {!isValid && <p>check all fields</p>}
+            {!isValid && <p className='text-danger'>Check all input fields</p>}
             {/* dialog box from material ui */}
             <Dialog
               open={open}

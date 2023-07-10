@@ -2,7 +2,7 @@
 // import react and index.css file to render EachCandidateColumnField1 component
 import React, { useState, useEffect } from "react";
 import "./index.css";
-function EachCandidateColumnField1({ onInputChange, isValidMail }) {
+function EachCandidateColumnField1({ onInputChange, isValidField }) {
   // inputValues usestate to store name,email,phone and endDate of test of students
   const [inputValues, setInputValues] = useState({
     name: "",
@@ -10,33 +10,125 @@ function EachCandidateColumnField1({ onInputChange, isValidMail }) {
     phone: "",
     endDate: "",
   });
-  const [validEmail, setValidEmail] = useState("true");
+  const [validEmail, setValidEmail] = useState(true);
   const [numberError, setNumberError] = useState(false);
+  const [nameError, setNameError] = useState(true);
   const validatePhoneNumber = (phoneNumber) => {
+    let isValid = false;
     if (phoneNumber.trim(" ").indexOf("+") === -1) {
-      console.log(phoneNumber.trim(" ").length);
-      if (
-        phoneNumber.trim(" ").length < 10 ||
-        phoneNumber.trim(" ").length > 10
-      ) {
-        setNumberError(true);
-      } else {
-        const regex = /[6-9]{1}[0-9]{9}/im;
-        if (regex.test(phoneNumber.trim(" "))) {
-          setNumberError(false);
+      const regex =
+        /^0[-\s.][6789]{1}[0-9]{9}$|(^[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[6-9]{1}[0-9]{3}[-\s\.]?[0-9]{3,6}$)|(^[\+]?[(]?[0-9]{2,3}[)]?[-\s\.]?[6-9]{1}[0-9]{2}[-\s\.]?[0-9]{4,7}$)/im;
+      if (phoneNumber.trim(" ")[0] === "0") {
+        let index = phoneNumber.trim(" ").indexOf(" ");
+        if (index !== -1) {
+          phoneNumber = phoneNumber.trim(" ").slice(index + 1);
+          let length = phoneNumber.length;
+          if (length < 10 || length > 10) {
+            isValid = true;
+            setNumberError(true);
+          } else {
+            const regex = /[6789]{1}[0-9]{3}[.\s-]?[0-9]{6}/g;
+            if (regex.test(phoneNumber)) {
+              isValid = false;
+              setNumberError(false);
+            } else {
+              isValid = true;
+              setNumberError(true);
+            }
+          }
         } else {
+          let index = phoneNumber.trim(" ").indexOf("-");
+          if (index !== -1) {
+            phoneNumber = phoneNumber.trim(" ").slice(index + 1);
+            let length = phoneNumber.length;
+            if (length < 10 || length > 10) {
+              isValid = true;
+              setNumberError(true);
+            } else {
+              const regex = /[6789]{1}[0-9]{3}[.\s-]?[0-9]{6}/g;
+              if (regex.test(phoneNumber)) {
+                isValid = false;
+                setNumberError(false);
+              } else {
+                isValid = true;
+                setNumberError(true);
+              }
+            }
+          } else {
+            phoneNumber = phoneNumber.trim(" ").slice(1);
+            let length = phoneNumber.length;
+            if (length > 10 || length < 10) {
+              isValid = true;
+              setNumberError(true);
+            } else {
+              const regex = /[6789]{1}[0-9]{3}[.\s-]?[0-9]{6}/g;
+              if (regex.test(phoneNumber)) {
+                isValid = false;
+                setNumberError(false);
+              } else {
+                isValid = true;
+                setNumberError(true);
+              }
+            }
+          }
+        }
+      } else {
+        if (
+          phoneNumber.trim(" ").length < 10 ||
+          phoneNumber.trim(" ").length > 10
+        ) {
+          isValid = true;
           setNumberError(true);
+        } else {
+          const regex = /[6-9]{1}[0-9]{9}/im;
+          if (regex.test(phoneNumber.trim(" "))) {
+            isValid = false;
+            setNumberError(false);
+          } else {
+            isValid = true;
+            setNumberError(true);
+          }
         }
       }
     } else {
-      const regex =
-        /(^[\+]?[(]?[0-9]{2,3}[)]?[-\s\.]?[6-9]{1}[0-9]{3}[-\s\.]?[0-9]{3,6}$)|(^[\+]?[(]?[0-9]{2,3}[)]?[-\s\.]?[6-9]{1}[0-9]{2}[-\s\.]?[0-9]{4,7}$)/im;
-      if (regex.test(phoneNumber.trim(" "))) {
-        setNumberError(false);
+      let index = phoneNumber.trim(" ").indexOf(" ");
+      if (index !== -1) {
+        phoneNumber = phoneNumber.trim(" ").slice(index + 1);
+        let length = phoneNumber.length;
+        if (length < 10 || length > 10) {
+          isValid = true;
+          setNumberError(true);
+        } else {
+          // const regex = /(^[\+]?[(]?[0-9]{1}[)]?[-\s]?[6789]{1}[0-9]{3}[-\s\.]?[0-9]{3,6}$)|(^[\+]?[(]?[0-9]{2}[)]?[-\s]?[6789]{1}[0-9]{3}[-\s\.]?[0-9]{3,6}$)|(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[6789]{1}[0-9]{3}[-\s\.]?[0-9]{3,6}$)/im;
+          const regex = /[6789]{1}[0-9]{3}[.\s-]?[0-9]{6}/g;
+          if (regex.test(phoneNumber.trim(" "))) {
+            isValid = false;
+            setNumberError(false);
+          } else {
+            isValid = true;
+            setNumberError(true);
+          }
+        }
       } else {
-        setNumberError(true);
+        let index = phoneNumber.trim(" ").indexOf("-");
+        phoneNumber = phoneNumber.trim(" ").slice(index + 1);
+        let length = phoneNumber.length;
+        if (length < 10 || length > 10) {
+          isValid = true;
+          setNumberError(true);
+        } else {
+          const regex = /([6789]{1}[0-9]{3}[-\s.]?[0-9]{6})/g;
+          if (regex.test(phoneNumber)) {
+            isValid = false;
+            setNumberError(false);
+          } else {
+            isValid = true;
+            setNumberError(true);
+          }
+        }
       }
     }
+    isValidField(!isValid && nameError && validEmail);
   };
   // below function add's the value with respective field of the candidate
   //it puts previous values the same and add's only active field value
@@ -47,14 +139,28 @@ function EachCandidateColumnField1({ onInputChange, isValidMail }) {
     }));
     // checking email field validation
     if (field === "email") {
-      const emailRegex = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-      const isValid = emailRegex.test(value.trim(" "));
+      // const emailRegex = /^[^\s@]+@[^\s@]+\.[a-z]{2,3}$/g;
+      // const isValid = emailRegex.test(value.trim(" "));
+      let isValid = true;
+      if (/^[^\s@]+@[a-z]+(.com|.in)$/gi.test(value)) {
+        isValid = true;
+        setValidEmail(isValid);
+      } else {
+        isValid = false;
+        setValidEmail(isValid);
+      }
       setValidEmail(isValid);
-      isValidMail(isValid);
+      isValidField(isValid && !numberError && nameError);
     }
     if (field === "phone") {
       validatePhoneNumber(value);
-      isValidMail(validEmail && numberError);
+      // isValidField(numberError);
+    }
+    if (field === "name") {
+      const nameRegex = /^[0-9]/g;
+      const isValid = nameRegex.test(value.trim(" "));
+      setNameError(!isValid);
+      isValidField(!isValid && !numberError && validEmail);
     }
   };
 
@@ -74,7 +180,9 @@ function EachCandidateColumnField1({ onInputChange, isValidMail }) {
             id='outlined-basic-1'
             placeholder='Name'
             variant='outlined'
-            className='mobile-custom-input-field'
+            className={`mobile-custom-input-field ${
+              nameError ? "" : "invalid"
+            }`}
             value={inputValues.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
             required

@@ -1,22 +1,20 @@
 // import index.css file for styling
-import React, {useState} from 'react'
-import Footer from '../Footer/Footer'
+import React, { useState } from "react";
+import Footer from "../Footer/Footer";
 // this component about score card design,downloading score card,sending scores to candidate through emails including cc
 import { GiHamburgerMenu } from "react-icons/gi";
 import gapi from "gapi-script";
 import Popup from "reactjs-popup";
-import {useNavigate,useLocation} from 'react-router-dom'
+import { useNavigate, useLocation } from "react-router-dom";
 import "reactjs-popup/dist/index.css";
 import "./index.css";
 
 const NotFound = () => {
-    // location varaiable to get location of the testReports route and state
-    const location=useLocation()
-    // useState of data to store Full Stack test data responses 
-    const [data, setData] = useState(
-      []
-    );
-    
+  // location varaiable to get location of the testReports route and state
+  const location = useLocation();
+  // useState of data to store Full Stack test data responses
+  const [data, setData] = useState([]);
+
   const navigate = useNavigate();
   return (
     <div>
@@ -70,7 +68,15 @@ const NotFound = () => {
         {/* nav header for mobile  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Admin */}
         <div className='admin-mobile-header-navbar-container'>
           <Popup
-            contentStyle={{ width: '70%',backgroundColor:"white",textAlign:'center',display:'flex',flexDirection:'column',justifyContent:'content',alignItems:'center' }}
+            contentStyle={{
+              width: "70%",
+              backgroundColor: "white",
+              textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "content",
+              alignItems: "center",
+            }}
             trigger={
               <button className='admin-hamburger-btn'>
                 <GiHamburgerMenu />
@@ -118,17 +124,16 @@ const NotFound = () => {
           </Popup>
         </div>
       </div>
-    <div className='not-found-container'>
-      <img
-        className='not-found-img'
-        src='https://res.cloudinary.com/dahw90b2z/image/upload/v1649202458/erroring_1_wmrpgf.png'
-        alt='page not found'
-      />
-      <h1 className='no-found-heading'>Page Not Found</h1>
-      <p>we are sorry, the page you requested could not be found</p>
-      <p>Please go back to homepage</p>
-    </div>
-    <Footer />
+      <div className='not-found-container'>
+        <img
+          className='not-found-img'
+          src='https://res.cloudinary.com/dahw90b2z/image/upload/v1649202458/erroring_1_wmrpgf.png'
+          alt='page not found'
+        />
+        <h1 className='no-found-heading'>Page Not Found</h1>
+        <p>we are sorry, the page you requested could not be found</p>
+        <p>Please go back to homepage</p>
+      </div>
     </div>
   );
 };

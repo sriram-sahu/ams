@@ -949,6 +949,11 @@ const AdminLogin = () => {
   // handleSignOut function used to signout of admin google account
   const handleSignOut = () => {
     Cookies.remove("token");
+    setActiveTab("");
+    setIsDashboard(false);
+    setIsAssessment(false);
+    setIsTestReports(false);
+    setIsStudentReports(false);
     const authInstance = window.gapi.auth2.getAuthInstance();
     authInstance.signOut();
   };
