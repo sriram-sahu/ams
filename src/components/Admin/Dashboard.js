@@ -406,7 +406,7 @@ const Dashboard = (props) => {
               Start Date:{"   "}
               <input
                 type='date'
-                min={new Date().toISOString().split("T")[0]}
+                max={new Date().toISOString().split("T")[0]}
                 value={startDate}
                 className='date-input'
                 style={{ marginLeft: "5px" }}
