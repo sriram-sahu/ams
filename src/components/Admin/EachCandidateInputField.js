@@ -2,17 +2,18 @@
 // import react and index.css file to render EachCandidateInputField component
 import React, { useState, useEffect } from "react";
 import "./index.css";
-const EachCandidateInputField = ({ onInputChange, isValidField }) => {
+const EachCandidateInputField = ({ onInputChange, isValidField, index }) => {
   // inputValues usestate to store name,email,phone and endDate of test of students
   const [inputValues, setInputValues] = useState({
     name: "",
     email: "",
     phone: "",
     endDate: "",
+    error: [],
   });
-  const [validEmail, setValidEmail] = useState(true);
+  const [validEmail, setValidEmail] = useState(false);
   const [numberError, setNumberError] = useState(false);
-  const [nameError, setNameError] = useState(true);
+  const [nameError, setNameError] = useState(false);
 
   const validatePhoneNumber = (phoneNumber) => {
     let isValid = false;
@@ -130,39 +131,43 @@ const EachCandidateInputField = ({ onInputChange, isValidField }) => {
       }
     }
     isValidField(!isValid && nameError && validEmail);
+    return isValid;
   };
+
+  const validateName = (name) => {};
+
   // below function add's the value with respective field of the candidate
   //it puts previous values the same and add's only active field value
+
   const handleInputChange = (field, value) => {
-    setInputValues((prevInputValues) => ({
-      ...prevInputValues,
-      [field]: value,
-    }));
     // checking email field validation
     if (field === "email") {
       // const emailRegex = /^[^\s@]+@[^\s@]+\.[a-z]{2,3}$/g;
       // const isValid = emailRegex.test(value.trim(" "));
-      let isValid = true;
+      let mailError;
       if (/^[^\s@]+@[a-z]+(.com|.in)$/gi.test(value)) {
-        isValid = true;
-        setValidEmail(isValid);
+        mailError = true;
+        setValidEmail(mailError);
       } else {
-        isValid = false;
-        setValidEmail(isValid);
+        mailError = false;
+        setValidEmail(mailError);
       }
-      setValidEmail(isValid);
-      isValidField(isValid && !numberError && nameError);
-    }
-    if (field === "phone") {
-      validatePhoneNumber(value);
-      // isValidField(numberError);
-    }
-    if (field === "name") {
+      isValidField(mailError, field + index);
+    } else if (field === "phone") {
+      let numError = validatePhoneNumber(value);
+      console.log(!numError, "sr");
+      isValidField(!numError, field + index);
+    } else if (field === "name") {
       const nameRegex = /^[0-9]/g;
-      const isValid = nameRegex.test(value.trim(" "));
-      setNameError(!isValid);
-      isValidField(!isValid && !numberError && validEmail);
+      let nameErr = nameRegex.test(value.trim(" "));
+      setNameError(!nameErr);
+      isValidField(!nameErr, field + index);
     }
+    setInputValues((prevInputValues) => ({
+      ...prevInputValues,
+      error: [nameError, validEmail, numberError],
+      [field]: value,
+    }));
   };
 
   useEffect(() => {

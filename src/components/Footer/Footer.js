@@ -1,5 +1,7 @@
 import React from "react";
 import "./Footer.css";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 const iconStyle = {
   fontSize: "28px",
@@ -20,12 +22,70 @@ function Footer() {
             <h4>mobile : +91 09663897463</h4>
           </div>
           <div className=''>
-            <div className=''>
-              <img
-                alt=''
-                className='rating-img'
-                src='https://res.cloudinary.com/dhbmdoldt/image/upload/v1688622021/WhatsApp_Image_2_y1einr.jpg'
-              />
+            <div className='rating-container'>
+              <div className='each-rating-container'>
+                <div className='each-rating-top'>
+                  <p>Reviewed On</p>
+                  <Stack spacing={1}>
+                    <Rating
+                      name='half-rating-read'
+                      defaultValue={4.5}
+                      precision={0.5}
+                      readOnly
+                    />
+                  </Stack>
+                </div>
+                <div className='each-rating-bottom '>
+                  <img
+                    alt=''
+                    src='https://res.cloudinary.com/dhbmdoldt/image/upload/v1688998907/ccccc_moavkz.png'
+                    className='rating-img clutch-img'
+                  />
+                  <p>4.5</p>
+                </div>
+              </div>
+              <div className='each-rating-container'>
+                <div className='each-rating-top'>
+                  <p>Reviewed On</p>
+                  <Stack spacing={1}>
+                    <Rating
+                      name='half-rating-read'
+                      defaultValue={4.6}
+                      precision={0.1}
+                      readOnly
+                    />
+                  </Stack>
+                </div>
+                <div className='each-rating-bottom'>
+                  <img
+                    alt=''
+                    className='rating-img'
+                    src='https://res.cloudinary.com/dhbmdoldt/image/upload/v1688997923/googleImg-removebg-preview_iqit27.png'
+                  />
+                  <p>4.6</p>
+                </div>
+              </div>
+              <div className='each-rating-container'>
+                <div className='each-rating-top'>
+                  <p>Reviewed On</p>
+                  <Stack spacing={1}>
+                    <Rating
+                      name='half-rating-read'
+                      defaultValue={4.7}
+                      precision={0.1}
+                      readOnly
+                    />
+                  </Stack>
+                </div>
+                <div className='each-rating-bottom'>
+                  <img
+                    alt=''
+                    className='rating-img'
+                    src='https://res.cloudinary.com/dhbmdoldt/image/upload/v1688986088/2560px-Glassdoor_logo.svg_w7o09f.png'
+                  />
+                  <p>4.7</p>
+                </div>
+              </div>
             </div>
             <h4 className='followus-container'>Follow Us</h4>
             <div className='social-media'>
@@ -64,7 +124,7 @@ function Footer() {
               target='_blank'
             >
               <div>
-                <p>terms & Conditions</p>
+                <p>Terms & Conditions</p>
               </div>
             </a>
             <a

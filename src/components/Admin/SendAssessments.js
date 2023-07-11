@@ -37,10 +37,54 @@ const Assessment = (props) => {
 
   const [isValid, setIsValid] = useState(false);
 
-  const checkValidEmail = (bool) => {
-    console.log(bool);
-    setIsValid(bool);
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  const checkValidEmail = (hasError, fieldName) => {
+    setFieldErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: hasError,
+    }));
   };
+
+  useEffect(() => {
+    const isValid = Object.values(fieldErrors)
+      .filter((value) => value !== undefined)
+      .every((value) => value === true);
+    setIsValid(isValid);
+    console.log(isValid);
+    console.log(fieldErrors);
+  }, [fieldErrors]);
+  // const [emailError, setEmailError] = useState(false);
+  // const [numberError, setNumberError] = useState(false);
+  // const [nameError, setNameError] = useState(false);
+
+  // const checkValidEmail = (hasError, field) => {
+  //   console.log(hasError, field);
+  //   if (field === "name") {
+  //     if (hasError) {
+  //       setNameError(true);
+  //     } else {
+  //       setNameError(false);
+  //     }
+  //   } else if (field === "email") {
+  //     if (hasError) {
+  //       setEmailError(true);
+  //     } else {
+  //       setNameError(false);
+  //     }
+  //   } else if (field === "phone") {
+  //     if (hasError) {
+  //       setNumberError(true);
+  //     } else {
+  //       setNumberError(false);
+  //     }
+  //   }
+  // };
+  // useEffect(() => {
+  //   console.log(!nameError, emailError, numberError);
+  //   setIsValid(!nameError && emailError && numberError);
+  // });
+
   // all tests names array
   const tests = [
     "Freshers Junior Test",
@@ -107,6 +151,7 @@ const Assessment = (props) => {
     });
   };
   const onClickProceed = () => {
+    setFieldErrors({});
     if (activeTest === "") {
       alert("Select Test");
     } else {

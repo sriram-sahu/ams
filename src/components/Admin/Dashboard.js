@@ -1,24 +1,29 @@
-// this component about  metrics for every test
+// this component about metrics for every test
+// import packages like react, react-router-dom, react-google-charts, gapi-script, js-cookie and css files like index.css and reactjs-popup/dist/index.css to render Dashboard component
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Chart } from "react-google-charts";
 import gapi from "gapi-script";
 import Cookies from "js-cookie";
-import { GiHamburgerMenu } from "react-icons/gi";
-import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import "./index.css";
 
 const Dashboard = (props) => {
+  // data prop
   const { data } = props;
-  const location = useLocation();
+  // navigate is used to navigating to different routes
   const navigate = useNavigate();
+  // finalData usestate to store all tests data responses
   const [finalData, setFinalData] = useState(data || []);
   let data1 = finalData?.allData?.flat() || [];
   let data2 = data1.map((item, index) => ({ ...item, id: index + 1 }));
+  // filterData usestate to store filter data
   const [filterData, setFilterData] = useState(data2);
+  // startDate usestate to store start date
   const [startDate, setStartDate] = useState("");
+  // endDate usestate to store the end date
   const [endDate, setEndDate] = useState("");
+  // handleFilter function to filter the test respones based on start and end dates
   const handleFilter = () => {
     const filtered = data2.filter((item) => {
       const itemDate = new Date(item.Timestamp);
@@ -27,10 +32,10 @@ const Dashboard = (props) => {
       end.setDate(end.getDate() + 1); // Added one day to the end date
       return itemDate >= start && itemDate <= end;
     });
-
     setFilterData(filtered);
   };
 
+  // individual test data responses using filter method
   const fresher = filterData?.length
     ? filterData.filter((item) => item.testType === "Freshers Test")
     : [];
@@ -66,6 +71,7 @@ const Dashboard = (props) => {
   const java = filterData?.length
     ? filterData.filter((item) => item.testType === "Java Test")
     : [];
+  // pieData of total number of all individual tests taken by students
   const pieData = [
     ["Language", "Speakers (in millions)"],
     [
@@ -92,11 +98,11 @@ const Dashboard = (props) => {
     ["Shopify_Test", shopify?.length ? shopify?.length : 0],
   ];
 
-  let freshers_aptitude_score = 0;
-  let freshers_technical_score = 0;
-  let freshers_aptitude_percentage = 0;
-  let freshers_technical_percentage = 0;
-
+  let freshers_aptitude_score = 0; // this variable stores the data ,aptitudescore who took fresher test
+  let freshers_technical_score = 0; // this variable stores the data ,Technicalscore who took fresher test
+  let freshers_aptitude_percentage = 0; //this variable stores the data , percentage of apitude score who took fresher test
+  let freshers_technical_percentage = 0; //this variable stores the data , percentage of Technical score who took fresher test
+  // this calculation for correct responses by the candidate in fresher test
   fresher?.map((item, index) => {
     freshers_aptitude_score += item.aptitude_score;
     freshers_technical_score += item.technical_score;
@@ -114,7 +120,7 @@ const Dashboard = (props) => {
     100;
 
   let python_aptitude_score = 0; // this variable stores the data ,aptitudescore who took Pythontest
-  let python_technical_score = 0; // this variable stores the data ,Technicalscore who took freshertest
+  let python_technical_score = 0; // this variable stores the data ,Technicalscore who took pythontest
   let python_aptitude_percentage = 0; //this variable stores the data , percentage of apitude score who took Pythontest
   let python_technical_percentage = 0; //this variable stores the data , percentage of Technical score who took Pythontest
 
@@ -356,7 +362,7 @@ const Dashboard = (props) => {
     ["FrontEndFresherTechnical", frontendfresher_technical_percentage],
   ];
   console.log(frontendfresherPieData);
-  //this data for designing the piechart of   freshersJuniorTest
+  //this data for designing the piechart of  freshersJuniorTest
   const freshersJuniorPieData = [
     ["Language", "Speakers (in millions)"],
     ["FreshersJuniorAptitude", freshersJunior_aptitude_percentage],
@@ -381,6 +387,7 @@ const Dashboard = (props) => {
     ["MERNDeveloeprJuniorTechnical", merndeveloperjunior_technical_percentage],
   ];
 
+  // if token is not exist then notfound component will render
   useEffect(() => {
     const token = Cookies.get("token");
     if (!token) {
@@ -388,82 +395,18 @@ const Dashboard = (props) => {
     }
   }, []);
 
-  const options = {
-    legend: "none",
-    title: "All Tests Metrics",
-    pieStartAngle: 100,
-  };
-
-  const fresheroptions = {
-    legend: "none",
-    title: "Freshers Test Metric",
-    pieStartAngle: 100,
-  };
-
-  const pythontestoptions = {
-    legend: "none",
-    title: "Python Test Metric",
-    pieStartAngle: 100,
-  };
-
-  const fullstactoptions = {
-    legend: "none",
-    title: "Full Stack Test Metric",
-    pieStartAngle: 100,
-  };
-
-  const javaoptions = {
-    legend: "none",
-    title: "Java Test Metric",
-    pieStartAngle: 100,
-  };
-
-  const qaoptions = {
-    legend: "none",
-    title: "QA Test Metric",
-    pieStartAngle: 100,
-  };
-
-  const froentendFresheroprions = {
-    legend: "none",
-    title: "Front End Fresher Test Metric",
-    pieStartAngle: 100,
-  };
-
-  const fresherjunioroptions = {
-    legend: "none",
-    title: "Freshers Junior Test Metric",
-    pieStartAngle: 100,
-  };
-
-  const merndeveloperjunioroptions = {
-    legend: "none",
-    title: "MERN Developer Junior Test Metric",
-    pieStartAngle: 100,
-  };
-
-  const mernintermediateoprions = {
-    legend: "none",
-    title: "MERN Developer Intermediate Test Metric",
-    pieStartAngle: 100,
-  };
-
-  const shopifyoptions = {
-    legend: "none",
-    title: "Shopify Test Metric",
-    pieStartAngle: 100,
-  };
-
   return (
     <div>
       <div className='dashboard-container'>
         <div>
           <h1 className='ams-heading'>AMS METRICS</h1>
+          {/* filter by date */}
           <div className='date-filter'>
             <div className='display-between'>
               Start Date:{"   "}
               <input
                 type='date'
+                min={new Date().toISOString().split("T")[0]}
                 value={startDate}
                 className='date-input'
                 style={{ marginLeft: "5px" }}
@@ -474,6 +417,7 @@ const Dashboard = (props) => {
               End Date:{" "}
               <input
                 type='date'
+                max={new Date().toISOString().split("T")[0]}
                 value={endDate}
                 className='date-input'
                 style={{ marginLeft: "5px" }}
@@ -481,13 +425,13 @@ const Dashboard = (props) => {
               />
             </div>
             <button
-              className='button1'
-              style={{ padding: "2px", width: "80px" }}
+              style={{ padding: "2px", width: "60px" }}
               onClick={handleFilter}
             >
               Filter
             </button>
           </div>
+          {/* if filterData length if greater than zero then below code will execute */}
           {filterData.length ? (
             <h2 className='allmetricsHeading'>
               Below Metric is about number of tests taken by student for each
@@ -614,6 +558,7 @@ const Dashboard = (props) => {
             correctly answered by students of different tests
           </h3>
         ) : null}
+        {/* individual test score percentages piecharts taken by students */}
         <div className='dashboard_chart_container'>
           {fresher.length ? (
             <div>

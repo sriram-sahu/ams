@@ -70,7 +70,7 @@ const TestReports = (props) => {
     {
       name: "MERN Developer Junior Test",
       id: "mern_developer_junior",
-      url: "https://www.technology4u.in/wp-content/uploads/2021/07/epv55hgtsfi8csprpj9u.jpg",
+      url: "https://www.bigscal.com/wp-content/uploads/2022/09/Features-of-Mern-stack-development-services-You-Should-Know.png",
       data: data?.datat?.mernDeveloperJuniorData || [],
     },
     {

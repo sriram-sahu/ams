@@ -248,6 +248,7 @@ function StudentReports(props) {
             Start Date:{"   "}
             <input
               type='date'
+              min={new Date().toISOString().split("T")[0]}
               value={startDate}
               className='date-input'
               style={{ width: "130px", marginLeft: "5px" }}
@@ -258,6 +259,7 @@ function StudentReports(props) {
             End Date:{" "}
             <input
               type='date'
+              max={new Date().toISOString().split("T")[0]}
               value={endDate}
               className='date-input'
               style={{ width: "130px", marginLeft: "5px" }}
