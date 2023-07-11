@@ -4,6 +4,7 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
+import logo from "./kloc-white-logo.png";
 import "./index.css";
 
 function Home() {
@@ -14,7 +15,7 @@ function Home() {
         <div className='headerContainer'>
           <div className='headerLogoContainer'>
             <img
-              src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688968121/kloc-white-logo_ct8uhz.png'
+              src={logo}
               alt='logo'
               style={{ height: "120px", width: "120px", marginTop: "10px" }}
             />

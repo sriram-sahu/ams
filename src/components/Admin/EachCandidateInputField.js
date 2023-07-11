@@ -208,6 +208,7 @@ const EachCandidateInputField = ({ onInputChange, isValidField, index }) => {
         <input
           id='outlined-basic-4'
           placeholder='Date'
+          min={new Date().toISOString().split("T")[0]}
           type='date'
           variant='outlined'
           className='custom-input-field'

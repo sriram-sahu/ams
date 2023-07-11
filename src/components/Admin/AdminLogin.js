@@ -11,6 +11,7 @@ import Dashboard from "./Dashboard";
 import SendAssessments from "./SendAssessments";
 import TestReports from "./TestReports";
 import StudentReports from "./StudentReports";
+import logo from "./kloc-white-logo.png";
 import "./AdminLogin.css";
 // scopes variable is a google api to get access of google spreadsheets
 const SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
@@ -1016,7 +1017,8 @@ const AdminLogin = () => {
             <div className='admin-header-logo-container'>
               {/* logo */}
               <img
-                src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688968121/kloc-white-logo_ct8uhz.png'
+                src={logo}
+                // src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688968121/kloc-white-logo_ct8uhz.png'
                 alt='logo'
                 style={{ height: "120px", width: "120px", marginTop: "10px" }}
                 onClick={() => navigate("/")}
