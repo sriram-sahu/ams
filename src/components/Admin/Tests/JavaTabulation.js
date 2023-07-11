@@ -7,6 +7,7 @@ import "reactjs-popup/dist/index.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import Footer from "../../Footer/Footer";
+import Logo from "./kloc-white-logo.png";
 import "./table.css";
 
 function JavaTest() {
