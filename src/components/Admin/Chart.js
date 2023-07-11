@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import Footer from "../Footer/Footer";
+import Logo from "./kloc-white-logo.png";
 import "./index.css";
 
 function Chart() {
@@ -179,9 +180,9 @@ function Chart() {
           <div className='admin-header-logo-container'>
             {/* logo */}
             <img
-              src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688216997/KLoc_Square_Logo_-_400x400_ciw1ej.jpg'
+              src={Logo}
               alt='logo'
-              style={{ height: "50px", width: "70px", borderRadius: "10px" }}
+              style={{ height: "120px", width: "120px", marginTop: "10px" }}
               onClick={() => navigate("/")}
             />
           </div>

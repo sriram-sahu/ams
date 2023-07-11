@@ -16,6 +16,7 @@ function StudentReports(props) {
   let data1 = data?.allData?.flat() || [];
 
   let data2 = data1.map((item, index) => ({ ...item, id: index + 1 }));
+
   const [filterData, setFilterData] = useState(data2);
 
   const [startDate, setStartDate] = useState("");
