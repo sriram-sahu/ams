@@ -22,7 +22,7 @@ const AdminLogin = () => {
   const [isAssessment, setIsAssessment] = useState(false);
   const [isTestReports, setIsTestReports] = useState(false);
   const [isStudentReports, setIsStudentReports] = useState(false);
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState("");
   const [fresherData, setFresherData] = useState([]);
   const [pythonData, setPythonData] = useState([]);
   const [fullStackData, setFullStackData] = useState([]);
@@ -414,7 +414,6 @@ const AdminLogin = () => {
           // Cookies.set method is used to set cookies for the login id token and expiration validity of 30 days
           Cookies.set("token", loginId, { expires: 30 });
           // if email does not exists, notFound component will render
-          handleAssessment();
         } else {
           navigate("/unauthorized");
         }
@@ -1012,129 +1011,155 @@ const AdminLogin = () => {
       <div className='admin-login-container'>
         {isSignedIn ? (
           // if admin has signedIn, the below code will render
-          <div className='admin-header-container'>
-            {/* header for desktop  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Sign Out */}
-            <div className='admin-header-logo-container'>
-              {/* logo */}
-              <img
-                src={logo}
-                // src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688968121/kloc-white-logo_ct8uhz.png'
-                alt='logo'
-                style={{ height: "120px", width: "120px", marginTop: "10px" }}
-                onClick={() => navigate("/")}
-              />
+          <div>
+            <div className='admin-header-container'>
+              {/* header for desktop  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Sign Out */}
+              <div className='admin-header-logo-container'>
+                {/* logo */}
+                <img
+                  src={logo}
+                  // src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688968121/kloc-white-logo_ct8uhz.png'
+                  alt='logo'
+                  style={{ height: "120px", width: "120px", marginTop: "10px" }}
+                  onClick={() => navigate("/")}
+                />
+              </div>
+              <div className='admin-desktop-header-navbar-container'>
+                {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
+                <p
+                  onClick={() => handleDashboard()}
+                  className={
+                    activeTab === "dashboard"
+                      ? `${activeClassName} `
+                      : "admin-desktop-header-navbar-link"
+                  }
+                >
+                  Dashboard
+                </p>
+                {/* when clicking this Assessments text, it'll navigates to send assessments route */}
+                <p
+                  onClick={() => handleAssessment()}
+                  className={
+                    activeTab === "assessments"
+                      ? `${activeClassName} `
+                      : "admin-desktop-header-navbar-link"
+                  }
+                >
+                  Assessments
+                </p>
+                {/* when clicking this Test Reports text, it'll navigates to test reports route */}
+                <p
+                  onClick={() => handleTestReports()}
+                  className={
+                    activeTab === "testReports"
+                      ? `${activeClassName} `
+                      : "admin-desktop-header-navbar-link"
+                  }
+                >
+                  Test Reports
+                </p>
+                {/* when clicking this student reports text, it'll navigates to student reports route */}
+                <p
+                  onClick={() => handleStudentReports()}
+                  className={
+                    activeTab === "studentReports"
+                      ? `${activeClassName} `
+                      : "admin-desktop-header-navbar-link"
+                  }
+                >
+                  Student Reports
+                </p>
+                {/* when clicking this Sign Out text, it'll navigates to admin login route and agains admin needs to sign in to access all routes */}
+                <p
+                  className='admin-desktop-header-navbar-link'
+                  onClick={handleSignOut}
+                >
+                  Sign Out
+                </p>
+              </div>
+              {/* nav header for mobile  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Sign Out */}
+              <div className='admin-mobile-header-navbar-container'>
+                <Popup
+                  contentStyle={{
+                    width: "70%",
+                    backgroundColor: "white",
+                    textAlign: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "content",
+                    alignItems: "center",
+                  }}
+                  trigger={
+                    <button className='admin-hamburger-btn'>
+                      <GiHamburgerMenu />
+                    </button>
+                  }
+                  position='bottom right'
+                >
+                  <ul className='admin-mobile-hamburger-menu'>
+                    {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
+                    <li
+                      onClick={() => handleDashboard()}
+                      className='admin-header-navbar-link'
+                    >
+                      Dashboard
+                    </li>
+                    {/* when clicking this Assessments text, it'll navigates to send assessments route */}
+                    <li
+                      onClick={() => handleAssessment()}
+                      className='admin-header-navbar-link'
+                    >
+                      Assessments
+                    </li>
+                    {/* when clicking this Test Reports text, it'll navigates to test reports route */}
+                    <li
+                      onClick={() => handleTestReports()}
+                      className='admin-header-navbar-link'
+                    >
+                      Test Reports
+                    </li>
+                    {/* when clicking this student reports text, it'll navigates to student reports route */}
+                    <li
+                      onClick={() => handleStudentReports()}
+                      className='admin-header-navbar-link'
+                    >
+                      Student Reports
+                    </li>
+                    {/* when clicking this Sign Out text, it'll navigates to admin login route and agains admin needs to sign in to access all routes */}
+                    <li
+                      onClick={handleSignOut}
+                      className='admin-header-navbar-link'
+                    >
+                      Sign Out
+                    </li>
+                  </ul>
+                </Popup>
+              </div>
             </div>
-            <div className='admin-desktop-header-navbar-container'>
-              {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
-              <p
-                onClick={() => handleDashboard()}
-                className={
-                  activeTab === "dashboard"
-                    ? `${activeClassName} `
-                    : "admin-desktop-header-navbar-link"
-                }
-              >
-                Dashboard
-              </p>
-              {/* when clicking this Assessments text, it'll navigates to send assessments route */}
-              <p
-                onClick={() => handleAssessment()}
-                className={
-                  activeTab === "assessments"
-                    ? `${activeClassName} `
-                    : "admin-desktop-header-navbar-link"
-                }
-              >
-                Assessments
-              </p>
-              {/* when clicking this Test Reports text, it'll navigates to test reports route */}
-              <p
-                onClick={() => handleTestReports()}
-                className={
-                  activeTab === "testReports"
-                    ? `${activeClassName} `
-                    : "admin-desktop-header-navbar-link"
-                }
-              >
-                Test Reports
-              </p>
-              {/* when clicking this student reports text, it'll navigates to student reports route */}
-              <p
-                onClick={() => handleStudentReports()}
-                className={
-                  activeTab === "studentReports"
-                    ? `${activeClassName} `
-                    : "admin-desktop-header-navbar-link"
-                }
-              >
-                Student Reports
-              </p>
-              {/* when clicking this Sign Out text, it'll navigates to admin login route and agains admin needs to sign in to access all routes */}
-              <p
-                className='admin-desktop-header-navbar-link'
-                onClick={handleSignOut}
-              >
-                Sign Out
-              </p>
-            </div>
-            {/* nav header for mobile  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Sign Out */}
-            <div className='admin-mobile-header-navbar-container'>
-              <Popup
-                contentStyle={{
-                  width: "70%",
-                  backgroundColor: "white",
-                  textAlign: "center",
+            {activeTab === "" && (
+              <div
+                style={{
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "content",
+                  justifyContent: "center",
                   alignItems: "center",
+                  fontSize: "40px",
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  backgroundImage:
+                    "url(https://source.unsplash.com/random?wallpapers)",
+                  backgroundRepeat: "no-repeat",
+                  height: "90vh",
+                  backgroundSize: "cover",
                 }}
-                trigger={
-                  <button className='admin-hamburger-btn'>
-                    <GiHamburgerMenu />
-                  </button>
-                }
-                position='bottom right'
               >
-                <ul className='admin-mobile-hamburger-menu'>
-                  {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
-                  <li
-                    onClick={() => handleDashboard()}
-                    className='admin-header-navbar-link'
-                  >
-                    Dashboard
-                  </li>
-                  {/* when clicking this Assessments text, it'll navigates to send assessments route */}
-                  <li
-                    onClick={() => handleAssessment()}
-                    className='admin-header-navbar-link'
-                  >
-                    Assessments
-                  </li>
-                  {/* when clicking this Test Reports text, it'll navigates to test reports route */}
-                  <li
-                    onClick={() => handleTestReports()}
-                    className='admin-header-navbar-link'
-                  >
-                    Test Reports
-                  </li>
-                  {/* when clicking this student reports text, it'll navigates to student reports route */}
-                  <li
-                    onClick={() => handleStudentReports()}
-                    className='admin-header-navbar-link'
-                  >
-                    Student Reports
-                  </li>
-                  {/* when clicking this Sign Out text, it'll navigates to admin login route and agains admin needs to sign in to access all routes */}
-                  <li
-                    onClick={handleSignOut}
-                    className='admin-header-navbar-link'
-                  >
-                    Sign Out
-                  </li>
-                </ul>
-              </Popup>
-            </div>
+                <h1 className='welcome-heading'>
+                  Welcome to Assessments Made Simple
+                </h1>
+                <br />
+                <h1 className='welcome-heading'>KLoc Technologies Pvt Ltd</h1>
+              </div>
+            )}
           </div>
         ) : (
           // if admin hasn't signedIn, the below code will render
