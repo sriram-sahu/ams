@@ -218,7 +218,6 @@ const Assessment = (props) => {
       })
       .catch((error) => console.log(error));
     const millisecondsDiff = Math.abs(sentDate.getTime() - endDate.getTime());
-    console.log(millisecondsDiff);
     setTimeout(() => {
       const key = "AIzaSyAz1z7QqYvovxmnO-lvzoORcMC1UZzXNRE";
       console.log(details.uniqueId);

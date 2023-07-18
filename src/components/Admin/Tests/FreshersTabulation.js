@@ -63,6 +63,13 @@ const FreshersTest = () => {
       width: 120,
     },
     {
+      field: "percentage",
+      headerName: "Percentage",
+      width: 100,
+      headerClassName: "table-header",
+      cellClassName: "table-cell",
+    },
+    {
       field: "aptitude_score",
       headerName: "Aptitude Score",
       headerClassName: "table-header",
@@ -100,24 +107,24 @@ const FreshersTest = () => {
 
   return (
     <div>
-      <div className='test-footer-container'>
-        <div className='test-reports-container'>
+      <div className="test-footer-container">
+        <div className="test-reports-container">
           {/* header for desktop  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Admin */}
-          <div className='admin-header-container'>
-            <div className='admin-header-logo-container'>
+          <div className="admin-header-container">
+            <div className="admin-header-logo-container">
               {/* logo */}
               <img
                 src={Logo}
-                alt='logo'
+                alt="logo"
                 style={{ height: "120px", width: "120px", marginTop: "10px" }}
                 onClick={() => navigate("/")}
               />
             </div>
-            <div className='admin-desktop-header-navbar-container'>
+            <div className="admin-desktop-header-navbar-container">
               {/* when clicking this Home text, it'll navigates to home route */}
               <p
                 onClick={() => navigate("/")}
-                className='admin-desktop-header-navbar-link'
+                className="admin-desktop-header-navbar-link"
               >
                 Home
               </p>
@@ -151,14 +158,14 @@ const FreshersTest = () => {
           </p> */}
               {/* when clicking this Sign Out text, it'll navigates to admin login route and again admin can access all routes */}
               <p
-                className='admin-desktop-header-navbar-link'
+                className="admin-desktop-header-navbar-link"
                 onClick={() => navigate("/adminLogin")}
               >
                 Admin
               </p>
             </div>
             {/* nav header for mobile  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Admin */}
-            <div className='admin-mobile-header-navbar-container'>
+            <div className="admin-mobile-header-navbar-container">
               <Popup
                 contentStyle={{
                   width: "70%",
@@ -170,17 +177,17 @@ const FreshersTest = () => {
                   alignItems: "center",
                 }}
                 trigger={
-                  <button className='admin-hamburger-btn'>
+                  <button className="admin-hamburger-btn">
                     <GiHamburgerMenu />
                   </button>
                 }
-                position='bottom right'
+                position="bottom right"
               >
-                <ul className='admin-mobile-hamburger-menu'>
+                <ul className="admin-mobile-hamburger-menu">
                   {/* when clicking this Home text, it'll navigates to home route */}
                   <li
                     onClick={() => navigate("/")}
-                    className='admin-header-navbar-link'
+                    className="admin-header-navbar-link"
                   >
                     Home
                   </li>
@@ -215,7 +222,7 @@ const FreshersTest = () => {
                   {/* when clicking this Sign Out text, it'll navigates to admin login route and again admin can access all routes */}
                   <li
                     onClick={() => navigate("/adminLogin")}
-                    className='admin-header-navbar-link'
+                    className="admin-header-navbar-link"
                   >
                     Admin
                   </li>
@@ -225,7 +232,7 @@ const FreshersTest = () => {
           </div>
           <h1 style={{ textAlign: "center" }}>Freshers Test Tabulation Data</h1>
           {/* desktop table container with table of Freshers test data respones */}
-          <div className='desktop-table'>
+          <div className="desktop-table">
             {data.length > 0 ? (
               <div
                 style={{
@@ -251,57 +258,61 @@ const FreshersTest = () => {
             )}
           </div>
           {/* mobile table container with table of Freshers test data responses */}
-          <div className='mobile-table'>
+          <div className="mobile-table">
             {data.length > 0
               ? data.map((item, index) => (
-                  <div className='table-data-cont'>
-                    <div className='table-data'>
-                      <p className='th'>Id</p>
-                      <p className='td'>{index + 1}</p>
+                  <div className="table-data-cont">
+                    <div className="table-data">
+                      <p className="th">Id</p>
+                      <p className="td">{index + 1}</p>
                     </div>
-                    <div className='table-data'>
+                    <div className="table-data">
                       <p>Completed On</p>
-                      <p className='td'>{item.Timestamp}</p>
+                      <p className="td">{item.Timestamp}</p>
                     </div>
-                    <div className='table-data'>
+                    <div className="table-data">
                       <p>Name</p>
-                      <p className='td'>{item.Name}</p>
+                      <p className="td">{item.Name}</p>
                     </div>
-                    <div className='table-data'>
+                    <div className="table-data">
                       <p>Email Address</p>
-                      <p className='td'>{item.Email_Address}</p>
+                      <p className="td">{item.Email_Address}</p>
                     </div>
-                    <div className='table-data'>
+                    <div className="table-data">
                       <p>Phone Number</p>
-                      <p className='td'>{item.Phone_Number}</p>
+                      <p className="td">{item.Phone_Number}</p>
                     </div>
-                    <div className='table-data'>
+                    <div className="table-data">
                       <p>Email Address</p>
-                      <p className='td'>{item.Email_Address}</p>
+                      <p className="td">{item.Email_Address}</p>
                     </div>
-                    <div className='table-data'>
+                    <div className="table-data">
                       <p>Total Score</p>
-                      <p className='td'>{item.Score}</p>
+                      <p className="td">{item.Score}</p>
                     </div>
-                    <div className='table-data'>
+                    <div className="table-data">
+                      <p>Percentage</p>
+                      <p className="td">{item.percentage}</p>
+                    </div>
+                    <div className="table-data">
                       <p>
                         {item.aptitude_score !== undefined
                           ? "Aptitude Score"
                           : "Java Score"}
                       </p>
-                      <p className='td'>
+                      <p className="td">
                         {item.aptitude_score !== undefined
                           ? item.aptitude_score
                           : item.fullstack_java_score}
                       </p>
                     </div>
-                    <div className='table-data'>
+                    <div className="table-data">
                       <p>
                         {item.technical_score !== undefined
                           ? "Technical Score"
                           : "React Score"}
                       </p>
-                      <p className='td'>
+                      <p className="td">
                         {item.technical_score !== undefined
                           ? item.technical_score
                           : item.reasoning_score !== undefined
@@ -309,14 +320,14 @@ const FreshersTest = () => {
                           : item.fullstack_react_score}
                       </p>
                     </div>
-                    <div className='table-data'>
+                    <div className="table-data">
                       <p>Test Type</p>
-                      <p className='td'>{item.testType}</p>
+                      <p className="td">{item.testType}</p>
                     </div>
                     {/* clicking view button it'll navigates to studentChart route */}
-                    <div className='view-button'>
+                    <div className="view-button">
                       <button
-                        className='btn'
+                        className="btn"
                         onClick={() =>
                           navigate("/studentChart", { state: item })
                         }

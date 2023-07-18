@@ -134,6 +134,8 @@ const EachCandidateInputField = ({ onInputChange, isValidField, index }) => {
     return isValid;
   };
 
+  const validateName = (name) => {};
+
   // below function add's the value with respective field of the candidate
   //it puts previous values the same and add's only active field value
 

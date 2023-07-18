@@ -22,7 +22,7 @@ const AdminLogin = () => {
   const [isAssessment, setIsAssessment] = useState(false);
   const [isTestReports, setIsTestReports] = useState(false);
   const [isStudentReports, setIsStudentReports] = useState(false);
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [fresherData, setFresherData] = useState([]);
   const [pythonData, setPythonData] = useState([]);
   const [fullStackData, setFullStackData] = useState([]);
@@ -38,6 +38,7 @@ const AdminLogin = () => {
   const [userEmail, setUserEmail] = useState("");
   // usestate to store boolean value of signedIn status of client
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   // navigate varaible used to navigating to different paths
   const navigate = useNavigate();
 
@@ -414,6 +415,7 @@ const AdminLogin = () => {
           // Cookies.set method is used to set cookies for the login id token and expiration validity of 30 days
           Cookies.set("token", loginId, { expires: 30 });
           // if email does not exists, notFound component will render
+          handleAssessment();
         } else {
           navigate("/unauthorized");
         }
@@ -466,6 +468,8 @@ const AdminLogin = () => {
       item.total_score = aptitude_score + technical_score;
       // Freshers Test value is added to key testType in item object of fresherData array
       item.testType = "Freshers Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
 
@@ -516,6 +520,8 @@ const AdminLogin = () => {
       item.total_score = item.aptitude_score + item.technical_score;
       // Python Test value is added to key testType in item object of pythonData array
       item.testType = "Python Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
   // after component rendering, fetchPythonData function logic will execute
@@ -565,6 +571,8 @@ const AdminLogin = () => {
       item.total_score = aptitude_score + technical_score;
       // Shopify Test value is added to key testType in item object of shopifyData array
       item.testType = "Shopify Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
   // after component rendering, fetchShopifyData function logic will execute
@@ -572,7 +580,7 @@ const AdminLogin = () => {
     fetchShopifyData();
     // shopifyData dependency is used so that any changes in shopifyData variable occurs, this effect will rerun
   }, [shopifyData]);
-
+  console.log(shopifyData, "shofifys");
   // fetchFrontEndFresherData function used to calculate aptitude and technical scores of front end fresher test and will be added to frontEndFresherData responses
   const fetchFrontEndFresherData = () => {
     frontEndFresherData.map((item, index) => {
@@ -614,6 +622,8 @@ const AdminLogin = () => {
       item.total_score = aptitude_score + technical_score;
       // Front End Fresher Test value is added to key testType in item object of frontEndFresherData array
       item.testType = "Front End Fresher Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
   // after component rendering, fetchFrontEndFresherData function logic will execute
@@ -663,6 +673,8 @@ const AdminLogin = () => {
       item.total_score = fullstack_java_score + fullstack_react_score;
       // Full Stack Test value is added to key testType in item object of fullStackData array
       item.testType = "Full Stack Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
   // after component rendering, fetchFullStackData function logic will execute
@@ -714,6 +726,8 @@ const AdminLogin = () => {
       item.total_score = aptitude_score + technical_score;
       // MERN Developer Intermediate Test value is added to key testType in item object of mernDeveloperIntermediateData array
       item.testType = "MERN Developer Intermediate Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
   // after component rendering, fetchMernDeveloperIntermediateData function logic will execute
@@ -763,6 +777,8 @@ const AdminLogin = () => {
       item.total_score = aptitude_score + technical_score;
       // Java Test value is added to key testType in item object of fetchJavaData array
       item.testType = "Java Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
   // after component rendering, fetchJavaData function logic will execute
@@ -814,6 +830,8 @@ const AdminLogin = () => {
       item.total_score = aptitude_score + technical_score;
       // MERN Developer Junior Test value is added to key testType in item object of fetchMernDeveloperJuniorData array
       item.testType = "MERN Developer Junior Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
   // after component rendering, fetchMernDeveloperJuniorData function logic will execute
@@ -863,6 +881,8 @@ const AdminLogin = () => {
       item.total_score = aptitude_score + technical_score;
       // QA Test value is added to key testType in item object of fetchQAData array
       item.testType = "QA Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
   // after component rendering, fetchQAData function logic will execute
@@ -912,6 +932,8 @@ const AdminLogin = () => {
       item.total_score = aptitude_score + reasoning_score;
       // Freshers Junior Test value is added to key testType in item object of fetchFreshersJuniorData array
       item.testType = "Freshers Junior Test";
+      const percentage = new Function(`return  ${item.Score}`)();
+      item.percentage = (percentage * 100).toFixed(2) + "%";
     });
   };
   // after component rendering, fetchFreshersJuniorData function logic will execute
@@ -982,6 +1004,7 @@ const AdminLogin = () => {
     setIsAssessment(false);
     setIsTestReports(false);
     setIsStudentReports(false);
+    setIsPopUpOpen(false);
     setActiveTab("dashboard");
   };
   const handleAssessment = () => {
@@ -989,6 +1012,7 @@ const AdminLogin = () => {
     setIsAssessment(true);
     setIsTestReports(false);
     setIsStudentReports(false);
+    setIsPopUpOpen(false);
     setActiveTab("assessments");
   };
   const handleTestReports = () => {
@@ -996,6 +1020,7 @@ const AdminLogin = () => {
     setIsAssessment(false);
     setIsTestReports(true);
     setIsStudentReports(false);
+    setIsPopUpOpen(false);
     setActiveTab("testReports");
   };
   const handleStudentReports = () => {
@@ -1003,173 +1028,150 @@ const AdminLogin = () => {
     setIsAssessment(false);
     setIsTestReports(false);
     setIsStudentReports(true);
+    setIsPopUpOpen(false);
     setActiveTab("studentReports");
   };
 
   return (
     <div>
-      <div className='admin-login-container'>
+      <div className="admin-login-container">
         {isSignedIn ? (
           // if admin has signedIn, the below code will render
-          <div>
-            <div className='admin-header-container'>
-              {/* header for desktop  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Sign Out */}
-              <div className='admin-header-logo-container'>
-                {/* logo */}
-                <img
-                  src={logo}
-                  // src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688968121/kloc-white-logo_ct8uhz.png'
-                  alt='logo'
-                  style={{ height: "120px", width: "120px", marginTop: "10px" }}
-                  onClick={() => navigate("/")}
-                />
-              </div>
-              <div className='admin-desktop-header-navbar-container'>
-                {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
-                <p
-                  onClick={() => handleDashboard()}
-                  className={
-                    activeTab === "dashboard"
-                      ? `${activeClassName} `
-                      : "admin-desktop-header-navbar-link"
-                  }
-                >
-                  Dashboard
-                </p>
-                {/* when clicking this Assessments text, it'll navigates to send assessments route */}
-                <p
-                  onClick={() => handleAssessment()}
-                  className={
-                    activeTab === "assessments"
-                      ? `${activeClassName} `
-                      : "admin-desktop-header-navbar-link"
-                  }
-                >
-                  Assessments
-                </p>
-                {/* when clicking this Test Reports text, it'll navigates to test reports route */}
-                <p
-                  onClick={() => handleTestReports()}
-                  className={
-                    activeTab === "testReports"
-                      ? `${activeClassName} `
-                      : "admin-desktop-header-navbar-link"
-                  }
-                >
-                  Test Reports
-                </p>
-                {/* when clicking this student reports text, it'll navigates to student reports route */}
-                <p
-                  onClick={() => handleStudentReports()}
-                  className={
-                    activeTab === "studentReports"
-                      ? `${activeClassName} `
-                      : "admin-desktop-header-navbar-link"
-                  }
-                >
-                  Student Reports
-                </p>
-                {/* when clicking this Sign Out text, it'll navigates to admin login route and agains admin needs to sign in to access all routes */}
-                <p
-                  className='admin-desktop-header-navbar-link'
-                  onClick={handleSignOut}
-                >
-                  Sign Out
-                </p>
-              </div>
-              {/* nav header for mobile  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Sign Out */}
-              <div className='admin-mobile-header-navbar-container'>
-                <Popup
-                  contentStyle={{
-                    width: "70%",
-                    backgroundColor: "white",
-                    textAlign: "center",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "content",
-                    alignItems: "center",
-                  }}
-                  trigger={
-                    <button className='admin-hamburger-btn'>
-                      <GiHamburgerMenu />
-                    </button>
-                  }
-                  position='bottom right'
-                >
-                  <ul className='admin-mobile-hamburger-menu'>
-                    {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
-                    <li
-                      onClick={() => handleDashboard()}
-                      className='admin-header-navbar-link'
-                    >
-                      Dashboard
-                    </li>
-                    {/* when clicking this Assessments text, it'll navigates to send assessments route */}
-                    <li
-                      onClick={() => handleAssessment()}
-                      className='admin-header-navbar-link'
-                    >
-                      Assessments
-                    </li>
-                    {/* when clicking this Test Reports text, it'll navigates to test reports route */}
-                    <li
-                      onClick={() => handleTestReports()}
-                      className='admin-header-navbar-link'
-                    >
-                      Test Reports
-                    </li>
-                    {/* when clicking this student reports text, it'll navigates to student reports route */}
-                    <li
-                      onClick={() => handleStudentReports()}
-                      className='admin-header-navbar-link'
-                    >
-                      Student Reports
-                    </li>
-                    {/* when clicking this Sign Out text, it'll navigates to admin login route and agains admin needs to sign in to access all routes */}
-                    <li
-                      onClick={handleSignOut}
-                      className='admin-header-navbar-link'
-                    >
-                      Sign Out
-                    </li>
-                  </ul>
-                </Popup>
-              </div>
+          <div className="admin-header-container">
+            {/* header for desktop  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Sign Out */}
+            <div className="admin-header-logo-container">
+              {/* logo */}
+              <img
+                src={logo}
+                // src='https://res.cloudinary.com/de5cu0mab/image/upload/v1688968121/kloc-white-logo_ct8uhz.png'
+                alt="logo"
+                style={{ height: "120px", width: "120px", marginTop: "10px" }}
+                onClick={() => navigate("/")}
+              />
             </div>
-            {activeTab === "" && (
-              <div
-                style={{
+            <div className="admin-desktop-header-navbar-container">
+              {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
+              <p
+                onClick={() => handleDashboard()}
+                className={
+                  activeTab === "dashboard"
+                    ? `${activeClassName} `
+                    : "admin-desktop-header-navbar-link"
+                }
+              >
+                Dashboard
+              </p>
+              {/* when clicking this Assessments text, it'll navigates to send assessments route */}
+              <p
+                onClick={() => handleAssessment()}
+                className={
+                  activeTab === "assessments"
+                    ? `${activeClassName} `
+                    : "admin-desktop-header-navbar-link"
+                }
+              >
+                Assessments
+              </p>
+              {/* when clicking this Test Reports text, it'll navigates to test reports route */}
+              <p
+                onClick={() => handleTestReports()}
+                className={
+                  activeTab === "testReports"
+                    ? `${activeClassName} `
+                    : "admin-desktop-header-navbar-link"
+                }
+              >
+                Test Reports
+              </p>
+              {/* when clicking this student reports text, it'll navigates to student reports route */}
+              <p
+                onClick={() => handleStudentReports()}
+                className={
+                  activeTab === "studentReports"
+                    ? `${activeClassName} `
+                    : "admin-desktop-header-navbar-link"
+                }
+              >
+                Student Reports
+              </p>
+              {/* when clicking this Sign Out text, it'll navigates to admin login route and agains admin needs to sign in to access all routes */}
+              <p
+                className="admin-desktop-header-navbar-link"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </p>
+            </div>
+            {/* nav header for mobile  with Logo and components Dashboard, Assessments, Test Reports, Student Reports and Sign Out */}
+            <div className="admin-mobile-header-navbar-container">
+              <Popup
+                contentStyle={{
+                  width: "70%",
+                  backgroundColor: "white",
+                  textAlign: "center",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "center",
+                  justifyContent: "content",
                   alignItems: "center",
-                  fontSize: "40px",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  backgroundImage:
-                    "url(https://source.unsplash.com/random?wallpapers)",
-                  backgroundRepeat: "no-repeat",
-                  height: "90vh",
-                  backgroundSize: "cover",
                 }}
+                trigger={
+                  <button className="admin-hamburger-btn">
+                    <GiHamburgerMenu onClick={() => setIsPopUpOpen(true)} />
+                  </button>
+                }
+                position="bottom right"
+                open={isPopUpOpen}
+                onClose={() => setIsPopUpOpen(false)}
               >
-                <h1 className='welcome-heading'>
-                  Welcome to Assessments Made Simple
-                </h1>
-                <br />
-                <h1 className='welcome-heading'>KLoc Technologies Pvt Ltd</h1>
-              </div>
-            )}
+                <ul className="admin-mobile-hamburger-menu">
+                  {/* when clicking this Dashboard text, it'll navigates to dashboard route */}
+                  <li
+                    onClick={() => handleDashboard()}
+                    className="admin-header-navbar-link"
+                  >
+                    Dashboard
+                  </li>
+                  {/* when clicking this Assessments text, it'll navigates to send assessments route */}
+                  <li
+                    onClick={() => handleAssessment()}
+                    className="admin-header-navbar-link"
+                  >
+                    Assessments
+                  </li>
+                  {/* when clicking this Test Reports text, it'll navigates to test reports route */}
+                  <li
+                    onClick={() => handleTestReports()}
+                    className="admin-header-navbar-link"
+                  >
+                    Test Reports
+                  </li>
+                  {/* when clicking this student reports text, it'll navigates to student reports route */}
+                  <li
+                    onClick={() => handleStudentReports()}
+                    className="admin-header-navbar-link"
+                  >
+                    Student Reports
+                  </li>
+                  {/* when clicking this Sign Out text, it'll navigates to admin login route and agains admin needs to sign in to access all routes */}
+                  <li
+                    onClick={handleSignOut}
+                    className="admin-header-navbar-link"
+                  >
+                    Sign Out
+                  </li>
+                </ul>
+              </Popup>
+            </div>
           </div>
         ) : (
           // if admin hasn't signedIn, the below code will render
-          <div className='display-column'>
+          <div className="display-column">
             <h2>Login With Google</h2>
             {/* if admin clicks this button, he can sign in into his account and get access for all routes */}
-            <button onClick={handleSignIn} className='google-signin-button'>
+            <button onClick={handleSignIn} className="google-signin-button">
               <img
-                src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
-                alt='Google Logo'
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                alt="Google Logo"
               />
               Sign In with Google
             </button>

@@ -16,7 +16,6 @@ function StudentReports(props) {
   let data1 = data?.allData?.flat() || [];
 
   let data2 = data1.map((item, index) => ({ ...item, id: index + 1 }));
-
   const [filterData, setFilterData] = useState(data2);
 
   const [startDate, setStartDate] = useState("");
@@ -90,6 +89,13 @@ function StudentReports(props) {
       cellClassName: "table-cell",
     },
     {
+      field: "percentage",
+      headerName: "Percentage",
+      width: 100,
+      headerClassName: "table-header",
+      cellClassName: "table-cell",
+    },
+    {
       field: "aptitude_score",
       headerName: "Aptitude Score",
       width: 100,
@@ -152,7 +158,7 @@ function StudentReports(props) {
       sortable: false,
       renderCell: (params) => (
         <button
-          className='button1'
+          className="button1"
           onClick={() => navigate("/studentChart", { state: params.row })}
           style={{ padding: "3px", width: "60px" }}
         >
@@ -225,57 +231,57 @@ function StudentReports(props) {
     //console.log("triggered");
   }, [search]);
   return (
-    <div className='student-reports-container'>
+    <div className="student-reports-container">
       <div>
         <h1 style={{ marginBottom: "15px", textAlign: "center" }}>
           Student Data
         </h1>
-        <div className='input-label-container'>
-          <label htmlFor='search'>Search by Student Email :</label>
+        <div className="input-label-container">
+          <label htmlFor="search">Search by Student Email :</label>
           <input
-            id='search'
+            id="search"
             value={search}
-            type='text'
+            type="text"
             onChange={handleSearch}
             onKeyDown={handleKeyDown}
             style={{
               marginLeft: "25px",
             }}
-            className='input-search input'
+            className="input-search input"
           />
         </div>
-        <div className='date-filter'>
-          <div className='display-between'>
+        <div className="date-filter">
+          <div className="display-between">
             Start Date:{"   "}
             <input
-              type='date'
-              max={new Date().toISOString().split("T")[0]}
+              type="date"
+              min={new Date().toISOString().split("T")[0]}
               value={startDate}
-              className='date-input'
+              className="date-input"
               style={{ width: "130px", marginLeft: "5px" }}
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
-          <div className='display-between'>
+          <div className="display-between">
             End Date:{" "}
             <input
-              type='date'
+              type="date"
               max={new Date().toISOString().split("T")[0]}
               value={endDate}
-              className='date-input'
+              className="date-input"
               style={{ width: "130px", marginLeft: "5px" }}
               onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
           <button
-            className='button1'
+            className="button1"
             style={{ padding: "2px", width: "60px" }}
             onClick={handleFilter}
           >
             Filter
           </button>
         </div>
-        <div className='d-none d-lg-block'>
+        <div className="d-none d-lg-block">
           {filterData.length > 0 ? (
             <div style={{ minHeight: 100, width: "95%", margin: "auto" }}>
               <DataGrid
@@ -295,57 +301,61 @@ function StudentReports(props) {
           )}
         </div>
         {/* mobile table container with all tests data responses cards */}
-        <div className='d-lg-none mobile-table-container'>
+        <div className="d-lg-none mobile-table-container">
           {filterData.length > 0
             ? filterData.map((item, index) => (
-                <div className='table-data-container' key={index}>
-                  <div className='table-data'>
-                    <p className='th'>Id</p>
-                    <p className='td'>{index + 1}</p>
+                <div className="table-data-container" key={index}>
+                  <div className="table-data">
+                    <p className="th">Id</p>
+                    <p className="td">{index + 1}</p>
                   </div>
-                  <div className='table-data'>
+                  <div className="table-data">
                     <p>Completed On</p>
-                    <p className='td'>{item.Timestamp}</p>
+                    <p className="td">{item.Timestamp}</p>
                   </div>
-                  <div className='table-data'>
+                  <div className="table-data">
                     <p>Name</p>
-                    <p className='td'>{item.Name}</p>
+                    <p className="td">{item.Name}</p>
                   </div>
-                  <div className='table-data'>
+                  <div className="table-data">
                     <p>Email Address</p>
-                    <p className='td'>{item.Email_Address}</p>
+                    <p className="td">{item.Email_Address}</p>
                   </div>
-                  <div className='table-data'>
+                  <div className="table-data">
                     <p>Phone Number</p>
-                    <p className='td'>{item.Phone_Number}</p>
+                    <p className="td">{item.Phone_Number}</p>
                   </div>
-                  <div className='table-data'>
+                  <div className="table-data">
                     <p>Email Address</p>
-                    <p className='td'>{item.Email_Address}</p>
+                    <p className="td">{item.Email_Address}</p>
                   </div>
-                  <div className='table-data'>
+                  <div className="table-data">
                     <p>Total Score</p>
-                    <p className='td'>{item.Score}</p>
+                    <p className="td">{item.Score}</p>
                   </div>
-                  <div className='table-data'>
+                  <div className="table-data">
+                    <p>Percentage</p>
+                    <p className="td">{item.percentage}</p>
+                  </div>
+                  <div className="table-data">
                     <p>
                       {item.aptitude_score !== undefined
                         ? "Aptitude Score"
                         : "Java Score"}
                     </p>
-                    <p className='td'>
+                    <p className="td">
                       {item.aptitude_score !== undefined
                         ? item.aptitude_score
                         : item.fullstack_java_score}
                     </p>
                   </div>
-                  <div className='table-data'>
+                  <div className="table-data">
                     <p>
                       {item.technical_score !== undefined
                         ? "Technical Score"
                         : "React Score"}
                     </p>
-                    <p className='td'>
+                    <p className="td">
                       {item.technical_score !== undefined
                         ? item.technical_score
                         : item.reasoning_score !== undefined
@@ -353,13 +363,13 @@ function StudentReports(props) {
                         : item.fullstack_react_score}
                     </p>
                   </div>
-                  <div className='table-data'>
+                  <div className="table-data">
                     <p>Test Type</p>
-                    <p className='td'>{item.testType}</p>
+                    <p className="td">{item.testType}</p>
                   </div>
-                  <div className='view-button'>
+                  <div className="view-button">
                     <button
-                      className='btn'
+                      className="btn"
                       onClick={() => navigate("/studentChart", { state: item })}
                     >
                       View Score
